@@ -10,5 +10,5 @@ import { connect } from "mongoose";
     } */
 
 export async function ConnectDB() {
-    await connect('mongodb+srv://JW0FSS:Lobomalo1234$jw0fss@api.txuob3d.mongodb.net/E-commerce')
+    await connect('')
 }
