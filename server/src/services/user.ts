@@ -38,7 +38,7 @@ export async function Register({email,password,username,address,phoneNumber,imag
 export async function Login({email,password}:UserLogin) {
     try {
 
-        const user =await UserModel.findOne({email}).select('image username favorites_id password')
+        const user =await UserModel.findOne({email}).select('image username password')
 
         if (!user) return {error:'email or password are incorrects'}
 
@@ -48,7 +48,7 @@ export async function Login({email,password}:UserLogin) {
 
         const jsonwebtoken=await jwt.sign({id:user._id},'holaa',{algorithm:'HS256',expiresIn:'1h'})
 
-        return jsonwebtoken
+        return {jsonwebtoken,image:user.image,username:user.username}
 
     } catch (error) {
         throw new Error(`error : ${error}`);

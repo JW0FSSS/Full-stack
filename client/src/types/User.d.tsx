@@ -1,4 +1,4 @@
-export interface UserRegister extends UserLogin{
+export interface User extends UserLogin{
     username:string,
     address?:{
         street:string,
