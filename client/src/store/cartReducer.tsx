@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IProduct } from "../types/product.d";
 
+const initialState:IProduct[]=(()=>{
+    const cartPersist=localStorage.getItem('__cart__')
+   return cartPersist?JSON.parse(cartPersist):[]
+})()   
 
 const cart=createSlice({
     name:'cart',
-    initialState:[] as IProduct[],
+    initialState,
     reducers:{
         addCart:(state,action)=>{
             const product=action.payload
@@ -19,7 +23,7 @@ const cart=createSlice({
             return state
         },
 
-        clearCart:(state,action)=>{ return[]},
+        clearCart:()=>{ return[]},
         removeCart:(state,action)=>{
             const id=action.payload
             return state.filter(e=>e._id!==id)

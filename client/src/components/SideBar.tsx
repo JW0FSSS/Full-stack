@@ -4,7 +4,7 @@ import { GetCategories } from "../services/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../store/ConfigureStore"
 import { setCategory } from "../store/categoryReducer";
-import { User } from "../icons/user";
+import { User } from "../icons/profile";
 import { Search } from "../icons/search";
 import { Heart } from "../icons/heart";
 import { Game } from "../icons/game";
@@ -36,7 +36,7 @@ export function SideBar() {
                 <p >GAMES</p>
                 </div>
             </header>
-            <Link to='/products' className="px-8 py-2 rounded-full bg-green-800 text-white/90">Go to Pay</Link>
+            <Link to='/cart' className="px-8 py-2 rounded-full bg-green-800 text-white/90">Go to Pay</Link>
 
             <nav className="flex flex-col gap-5">
                 <Link to={'/profile'}> <img src="" alt=""/><div className="flex gap-5"> <User/> <p>Profile</p></div></Link>

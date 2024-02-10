@@ -1,6 +1,6 @@
-import { UserLogin, UserRegister } from "../types/User.d"
+import { UserLogin, User } from "../types/User.d"
 
-export async function UserFetchRegister({username,email,password,address,image,phoneNumber}:UserRegister) {
+export async function UserFetchRegister({username,email,password,address,image,phoneNumber}:User) {
     const res=await fetch('http://localhost:3000/register',{
         method:'post',
         headers:{

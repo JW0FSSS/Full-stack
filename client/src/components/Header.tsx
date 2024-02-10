@@ -10,13 +10,13 @@ export function Header() {
         <header className="w-full flex justify-between mb-10 text-white/70">
                 <label htmlFor="search" className="flex relative ">
                     <input type="text" placeholder="Search...." className="bg-transparent pr-20 pl-7 py-1" id="search"/>
-                    <div className="absolute top-1">
+                    <div className="absolute top-2">
                         <Search />
                     </div>
                 </label>
-                <div className="flex gap-5">
+                <div className="flex gap-5 items-center">
                     <p>{user.username?user.username.toUpperCase():'Login'}</p>
-                    <img className='rounded-full' src={`${user.image?user.image:''}`} alt="" />
+                    <img className='rounded-full w-10' src={`${user.image?user.image:''}`} alt=""  />
                 </div>
             </header>
     )

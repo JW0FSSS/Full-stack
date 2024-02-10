@@ -6,7 +6,7 @@ export interface User extends UserLogin{
         state:string
     },
     image?:string,
-    phoneNumber?:number,
+    phoneNumber?:string,
 }
 
  export interface UserLogin{

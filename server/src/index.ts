@@ -6,6 +6,8 @@ import { user } from "./routes/user";
 import { favorite } from "./routes/favorite";
 import { product } from "./routes/product";
 import { category } from "./routes/category";
+import { payment } from "routes/payment";
+import './config/enviroments'
 
 const app=express()
 
@@ -13,6 +15,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(user)
+app.use('/payment',payment)
 app.use('/favorite',favorite)
 app.use('/product',product)
 app.use('/category',category)
