@@ -3,6 +3,7 @@ import userReducer from "./usersReducer";
 import productReducer from "./productReducer";
 import cartReducer from "./cartReducer";
 import categoryReducer from "./categoryReducer";
+import favoriteReducer from "./favoriteReducer";
 
 
 const UserMiddleware =(store)=>(next)=>(action)=>{
@@ -33,7 +34,8 @@ export const store=configureStore({
         user:userReducer,
         products:productReducer,
         cart:cartReducer,
-        category:categoryReducer
+        category:categoryReducer,
+        favorite:favoriteReducer
     },
     middleware:()=>[UserMiddleware,CartMiddleware]
 })

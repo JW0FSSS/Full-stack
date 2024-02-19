@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+
 import { ProductModel } from "schemas/products";
 import { Product } from "types/product";
 
@@ -27,10 +27,10 @@ export async function CreateProduct({categories_id,name,price,quantity,descripti
 
 }
 
-export async function GetProducts() {
+export async function GetProducts({limit}:{limit:number}) {
     
     try {
-        const products= await ProductModel.find({})
+        const products= await ProductModel.find({}).limit(limit).populate('categories_id')
         
         return products
 
@@ -43,7 +43,7 @@ export async function GetProducts() {
 export async function GetProductId({id}:{id:string}) {
     
     try {
-        const product= await ProductModel.findById({_id:id})
+        const product= await ProductModel.findById({_id:id}).populate('categories_id')
 
         if (!product) return {error:'products no exist'}
         

@@ -11,9 +11,10 @@ export function CardProduct({cart}:{cart:IProduct[]}) {
 
     const products= useSelector((state:IStore)=>state.products)
     const productDispatch=useDispatch()
+    const limit=8
 
     useEffect(()=>{
-        GetProducts().then(products=>{
+        GetProducts({limit}).then(products=>{
           productDispatch(setProducts(products))        
         })
       },[])

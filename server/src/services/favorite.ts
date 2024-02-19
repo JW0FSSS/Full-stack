@@ -21,7 +21,7 @@ export async function AddFavorite({product_id,user_id}:Favorite) {
 export async function FavoriteId({user_id}:{user_id:string}) {
     try {
         
-        const favorite = await FavoriteModel.findOne({user_id})
+        const favorite = await FavoriteModel.findOne({user_id}).populate('product_id')
 
         if (!favorite) return {error:'error when reference user'}
 

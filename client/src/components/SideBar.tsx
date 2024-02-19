@@ -17,10 +17,10 @@ import { Instagram } from "../icons/instagram";
 
 export function SideBar() {
     const categories=useSelector((state:IStore)=>state.category)
+    const user=useSelector((state:IStore)=>state.user)
     const categoriesDispatch=useDispatch()
 
     useEffect(()=>{
-
         GetCategories().then(categories=>{
             categoriesDispatch(setCategory(categories))
         })
@@ -39,7 +39,7 @@ export function SideBar() {
             <Link to='/cart' className="px-8 py-2 rounded-full bg-green-800 text-white/90">Go to Pay</Link>
 
             <nav className="flex flex-col gap-5">
-                <Link to={'/profile'}> <img src="" alt=""/><div className="flex gap-5"> <User/> <p>Profile</p></div></Link>
+                <Link to={`${user.username?'/':'profile'}`}><div className="flex gap-5"> <User/> <p>Profile</p></div></Link>
                 <Link to={'/'}><div className="flex gap-5"> <Search/><p>Search</p></div></Link>
                 <Link to={'/favorite'}><div className="flex gap-5"> <Heart/> <p>Favorite</p></div></Link>
                 <Link to={'/'}><div className="flex gap-5"> <User/> <p>To do</p></div></Link>

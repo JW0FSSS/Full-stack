@@ -31,7 +31,7 @@ export function SectionOne({cart}:{cart:IProduct[]}) {
                                         <div>
                                             <span className="text-4xl ">{product.rate}****</span>
                                             <h1 className="text-6xl text-white mb-3">{product.name}</h1>
-                                            <h2 className="text-2xl mb-5">"{product.categories_id}"</h2>
+                                            <h2 className="text-2xl mb-5">"{product.categories_id.map(e=>e.name)}"</h2>
                                             <div className="w-36 h-0 border border-black/40"></div>
                                              <p className="mt-5">{product.description}</p>
                                         </div>
@@ -53,7 +53,7 @@ export function SectionOne({cart}:{cart:IProduct[]}) {
                                                 <img src={`${product.image}`} alt={`${product.description}`} className=""/>
                                                 <div className="flex flex-col items-center">
                                                     <h1 className="text-6xl text-white mb-3">{product.name}</h1>
-                                                    <h2 className="text-2xl mb-5">"{product.categories_id}"</h2>
+                                                    <h2 className="text-2xl mb-5">"{product.categories_id.map(e=>e.name)}"</h2>
                                                     <p className="mt-5">{product.description}</p>
                                                 </div>
                                             </div>
