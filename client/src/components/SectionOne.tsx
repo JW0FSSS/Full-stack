@@ -20,7 +20,7 @@ export function SectionOne({cart}:{cart:IProduct[]}) {
       }
 
     return(
-        <section className="bg-black/50 rounded-md py-10 px-36">  
+        <section  className="bg-black/50 rounded-md py-10 px-36 w-full h-[400px]">  
                             <div className="flex relative w-full h-full">
                             {first.map(product=>{
                                 const filter=cart.some(e=>e._id==product._id)

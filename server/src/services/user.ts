@@ -46,9 +46,9 @@ export async function Login({email,password}:UserLogin) {
 
         if (!VerifyPassword) return {error:'email or password are incorrects'}
 
-        const jsonwebtoken=await jwt.sign({id:user._id},'holaa',{algorithm:'HS256',expiresIn:'1h'})
+        const jsonwebtoken=await jwt.sign({id:user._id},process.env.JWT_ENCODED||'holaa',{algorithm:'HS256',expiresIn:'1h'})
 
-        return {jsonwebtoken,image:user.image,username:user.username}
+        return {token:jsonwebtoken,image:user.image,username:user.username}
 
     } catch (error) {
         throw new Error(`error : ${error}`);

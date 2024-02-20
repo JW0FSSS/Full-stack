@@ -12,9 +12,21 @@ export const user=createSlice({
     reducers:{
         setUser:(state,action:{type:string,payload:User})=>{
             const user=action.payload
-            return user
+
+            state.address=user.address
+            state.email=user.email
+            state.phoneNumber=user.phoneNumber
+
+            return state
+        },
+        setUserLogin:(state,action:{type:string,payload:User})=>{
+            const user=action.payload
+            state.username=user.username
+            state.image=user.image
+            state.token=user.token
+            return state
         }
     }
 })
-export const {setUser}=user.actions
+export const {setUser,setUserLogin}=user.actions
 export default user.reducer

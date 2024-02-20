@@ -13,9 +13,10 @@ export async function VerifyJwt(req:IRequest,res:Response,next:NextFunction) {
     try {
         const header=req.headers.authorization
 
-        const token=header?.split(' ')[0]
+        const token=header?.split(' ')[1]
 
-        const payload= await jwt.verify(token||'','holaa') as IPayload
+    
+        const payload= await jwt.verify(token||'',process.env.JWT_ENCODED||'holaa') as IPayload
         
         if (!payload) return res.send({error:'user prohibided'}).status(303)
             

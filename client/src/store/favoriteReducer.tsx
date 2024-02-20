@@ -10,12 +10,12 @@ const favorite=createSlice({
     name:'favorite',
     initialState,
     reducers:{
-        addFavorite:(state,action)=>{
+        setFavorite:(state,action)=>{
             const product=action.payload
-            return [...state,...product]
+            return [...product]
         }
     }
 })
-export const {addFavorite} =favorite.actions
+export const {setFavorite} =favorite.actions
 
 export default favorite.reducer

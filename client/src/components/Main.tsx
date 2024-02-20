@@ -13,7 +13,7 @@ export function Main() {
     const cart= useSelector((state:IStore)=>state.cart)
    
     return(
-        <section className="ml-80 pl-10 pr-14 pt-7 pb-10 bg-black/70">
+        <section className="ml-80 pl-10 pr-14 pt-7 pb-10 bg-black/80 min-h-screen">
             
             <ButtonCart open={open} setOpen={setOpen}/>
             <AsideCart open={open}/>
@@ -24,10 +24,7 @@ export function Main() {
                 <section>
                     <div className="my-10 flex gap-8">
                         <h1 className="text-2xl text-white">Our products</h1>
-                        <div className="flex gap-4 items-center"> 
-                            <span className="border border-black text-white py-2 px-12 rounded-full">top</span>
-                            <span className="border border-black text-white py-2 px-12 rounded-full">top</span>
-                            <span className="border border-black text-white py-2 px-12 rounded-full">top</span>
+                        <div className="flex gap-4 items-center">
                         </div>
                     </div>
                     <CardProduct cart={cart}/>

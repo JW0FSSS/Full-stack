@@ -10,11 +10,20 @@ const UserMiddleware =(store)=>(next)=>(action)=>{
     
     next(action)
     
+    if (action.type=='users/setUserLogin') {
+        const newState=store.getState()
+        
+        const {image,username,token} = newState.user
+        localStorage.setItem('__user__',JSON.stringify({image,username,token}))
+        
+    }
     if (action.type=='users/setUser') {
         const newState=store.getState()
-        const {image,username,jsonwebtoken:token} = newState.user
-        localStorage.setItem('__user__',JSON.stringify({image,username}))
-        localStorage.setItem('__token__',JSON.stringify({token}))
+        const {address,phoneNumber} = newState.user
+        const state=JSON.parse(localStorage.getItem('__user__'))
+        state.address=address
+        state.phoneNumber=phoneNumber
+        localStorage.setItem('__user__',JSON.stringify({...state}))
     }
 }
 

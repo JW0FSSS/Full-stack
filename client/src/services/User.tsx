@@ -25,3 +25,16 @@ export async function UserFetchLogin({email,password}:UserLogin) {
         return data
     
 }
+
+export async function UserFetchProfile({token}:{token:string}) {
+        
+        const res=await fetch('http://localhost:3000/profile',{
+            headers:{
+                'Content-type':'application/json',
+                'Authorization':`bearer ${token}` 
+            }
+        })
+        const data=await res.json()
+        return data
+    
+}

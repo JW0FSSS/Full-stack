@@ -1,7 +1,9 @@
-import { AddFavoriteController, FavoriteIdController } from "controllers/favorite";
+import { AddFavoriteController, FavoriteIdController,DeleteFavoriteController } from "controllers/favorite";
 import { Router } from "express";
+import { VerifyJwt } from "middlewares/jsonwebtoken";
 
 export const favorite=Router()
 
-favorite.post('/',AddFavoriteController)
-favorite.post('/:user_id',FavoriteIdController)
+favorite.post('/',VerifyJwt,AddFavoriteController)
+favorite.delete('/',VerifyJwt,DeleteFavoriteController)
+favorite.get('/',VerifyJwt,FavoriteIdController)

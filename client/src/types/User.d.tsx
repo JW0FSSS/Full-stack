@@ -7,6 +7,7 @@ export interface User extends UserLogin{
     },
     image?:string,
     phoneNumber?:string,
+    token:string
 }
 
  export interface UserLogin{
