@@ -1,5 +1,5 @@
 export async function FetchFavorite({token}:{token:string}) {
-    const res= await fetch(`http://localhost:3000/favorite`,{
+    const res= await fetch(`https://full-stack-qpdq.onrender.com//favorite`,{
         headers:{
             'Content-type':'application/json',
             'Authorization':`bearer ${token}`
@@ -9,7 +9,7 @@ export async function FetchFavorite({token}:{token:string}) {
     return data
 }
 export async function FetchFavoriteAdd({token,product_id}:{token:string,product_id:string}) {
-    const res= await fetch(`http://localhost:3000/favorite`,{
+    const res= await fetch(`https://full-stack-qpdq.onrender.com//favorite`,{
         method:'post',
         headers:{
             'Content-type':'application/json',
@@ -21,7 +21,7 @@ export async function FetchFavoriteAdd({token,product_id}:{token:string,product_
     return data
 }
 export async function FetchFavoriteDelete({token,product_id}:{token:string,product_id:string}) {
-    const res= await fetch(`http://localhost:3000/favorite`,{
+    const res= await fetch(`https://full-stack-qpdq.onrender.com//favorite`,{
         method:'delete',
         headers:{
             'Content-type':'application/json',
