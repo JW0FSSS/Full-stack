@@ -7,23 +7,38 @@ import { setProducts } from "../store/productReducer"
 import { Plus } from "../icons/plus"
 import { IProduct } from "../types/product.d"
 import { ButtonFavorite } from "./AddFavoriteButton"
+import { FetchFavorite } from "../services/favorite"
+import { setFavorite } from "../store/favoriteReducer"
 
 export function CardProduct({cart}:{cart:IProduct[]}) {
 
     const products= useSelector((state:IStore)=>state.products)
+    const favorite= useSelector((state:IStore)=>state.favorite)
+    const user= useSelector((state:IStore)=>state.user)
     const productDispatch=useDispatch()
-    const limit=8
+    const favoriteDispatch=useDispatch()
 
     useEffect(()=>{
-        GetProducts({limit}).then(products=>{
+        user.token
+        ?FetchFavorite({token:user.token})
+        .then(res=>favoriteDispatch(setFavorite(res.product_id)))
+        :null
+    },[])
+
+    useEffect(()=>{
+        
+        GetProducts({limit:8,filter:''}).then(products=>{
           productDispatch(setProducts(products))        
         })
       },[])
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ">
-                        {products.map(product=>{
+                        {products.length<1?
+                        <h1 className="text-white text-3xl col-span-4 text-center">Not found Products</h1>:
+                        products.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)
+                            const filterFav=favorite.some(e=>e._id==product._id)
                             return(
                                 <article key={product._id} className="bg-black/70 rounded-md flex flex-col items-center py-3 px-10 gap-4 text-white/80 relative z-0">
                                     <div className="-mt-10 w-60 h-60 overflow-hidden grid place-content-center">
@@ -41,7 +56,7 @@ export function CardProduct({cart}:{cart:IProduct[]}) {
                                             <p>{filter?'Remove Cart':'Add Cart'}</p>
                                         </button>
                                             <div className={`absolute z-50 top-4 right-4`}>
-                                                <ButtonFavorite product_id={product._id}/>
+                                                <ButtonFavorite product={product} filterFav={filterFav} favoriteDispatch={favoriteDispatch}/>
                                             </div>     
                                 </article>
                             )

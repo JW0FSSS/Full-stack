@@ -27,11 +27,16 @@ export async function CreateProduct({categories_id,name,price,quantity,descripti
 
 }
 
-export async function GetProducts({limit}:{limit:number}) {
+export async function GetProducts({limit,filter}:{limit:number,filter:string}) {
     
     try {
-        const products= await ProductModel.find({}).limit(limit).populate('categories_id')
+        if (filter=='') {
+            return ProductModel.find({}).limit(limit).populate('categories_id')
+        }
         
+        const regex= new RegExp(`^${filter}`,'i')
+        const products= await ProductModel.find({name:regex}).limit(limit).populate('categories_id')
+       
         return products
 
     } catch (error) {

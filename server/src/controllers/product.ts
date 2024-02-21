@@ -19,9 +19,9 @@ export async function GetProductController(req:Request,res:Response) {
     
     try {
 
-        const {limit=0}=req.query
+        const {limit=0,filter=''}=req.query
 
-        const data = await GetProducts({limit})
+        const data = await GetProducts({limit,filter})
 
         res.json(data)
 

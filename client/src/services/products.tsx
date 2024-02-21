@@ -1,7 +1,7 @@
 
 
-export async function GetProducts({limit=0}:{limit:number}) {
-    const res=await fetch(`http://localhost:3000/product?limit=${limit}`,{
+export async function GetProducts({limit=0,filter=''}:{limit:number,filter:string}) {
+    const res=await fetch(`http://localhost:3000/product?limit=${limit}&filter=${filter}`,{
         method:'get',
         headers:{
             'Content-type':'application/json'

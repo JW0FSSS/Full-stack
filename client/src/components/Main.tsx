@@ -11,10 +11,10 @@ export function Main() {
 
     const [open,setOpen]=useState(false)
     const cart= useSelector((state:IStore)=>state.cart)
-   
+    
+
     return(
         <section className="ml-80 pl-10 pr-14 pt-7 pb-10 bg-black/80 min-h-screen">
-            
             <ButtonCart open={open} setOpen={setOpen}/>
             <AsideCart open={open}/>
             <Header/>

@@ -13,9 +13,21 @@ const favorite=createSlice({
         setFavorite:(state,action)=>{
             const product=action.payload
             return [...product]
+        },
+        addFavorite:(state,action)=>{
+            const product=action.payload
+            console.log(product)
+            
+            const newState=[...state,product]
+            return newState
+        },
+        deleteFavorite:(state,action)=>{
+            const product=action.payload
+            const newstate=state.filter(e=>e._id!==product._id)
+            return newstate
         }
     }
 })
-export const {setFavorite} =favorite.actions
+export const {setFavorite,addFavorite,deleteFavorite} =favorite.actions
 
 export default favorite.reducer

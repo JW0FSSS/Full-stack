@@ -4,7 +4,7 @@ import { UserFetchRegister } from "../services/User"
 import { Navigate } from "react-router"
 
 export function Register() {
-    const [data,setData]=useState<User>({username:'',email:'',password:'',image:'',address:{city:'',state:'',street:''},phoneNumber:''})
+    const [data,setData]=useState<User>({username:'',email:'',password:'',image:'',address:{city:'',state:'',street:''},phoneNumber:'',token:''})
     const [error,setError]=useState({message:''})
 
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -13,7 +13,13 @@ export function Register() {
     const handleRegister=(e:React.FormEvent<HTMLFormElement>)=>{
        e.preventDefault()
 
-       UserFetchRegister({...data}).then(data=>setError({message:data.message}))
+       UserFetchRegister({...data}).then(res=>{
+        setError({message:res.error})
+        setError({message:res.message})
+        setTimeout(() => {
+            setError({message:''})
+        }, 2500);
+       })
    }
     
     return(
