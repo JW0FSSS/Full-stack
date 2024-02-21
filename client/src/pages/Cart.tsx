@@ -8,7 +8,7 @@ export function Cart() {
     const cart=useSelector((state:IStore)=>state.cart)
     const cartDispatch=useDispatch()
 
-    const handlePay=((e:React.MouseEvent<HTMLButtonElement>)=>{
+    const handlePay=(()=>{
         FetchPay({cart}).then(data=>{
             data?window.location.href=data:console.log('error');
             cartDispatch(clearCart())

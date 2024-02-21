@@ -14,7 +14,7 @@ export function Header() {
     const handlefetch=(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         const filter=text.current?.value 
-        GetProducts({limit:8,filter})
+        GetProducts({limit:8,filter:filter||''})
         .then(res=>productDispatch(setProducts(res)))
     }
 

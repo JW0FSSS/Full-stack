@@ -15,7 +15,7 @@ export function SectionOne({cart}:{cart:IProduct[]}) {
         })
       },[])
 
-      const handleDialog=(e: React.MouseEvent<HTMLButtonElement> )=>{
+      const handleDialog=( )=>{
         setDialog(!dialog)
       }
 

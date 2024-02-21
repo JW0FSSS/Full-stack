@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { IStore } from "../store/ConfigureStore"
 import { Navigate } from "react-router"
 
-export function Protected({children}) {
+export function Protected({children}:{children:JSX.Element}) {
 
     const user=useSelector((state:IStore)=>state.user)
 

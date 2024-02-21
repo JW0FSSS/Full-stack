@@ -5,10 +5,10 @@ export const product=createSlice({
     name:'product',
     initialState:[] as IProduct[],
     reducers:{
-        getProducts:(state,action)=>{
+        getProducts:(state,_)=>{
             return state
         },
-        setProducts:(state,action:{ payload: IProduct[];type: string;})=>{
+        setProducts:(_,action:{ payload: IProduct[];type: string;})=>{
             
             const products=action.payload 
 

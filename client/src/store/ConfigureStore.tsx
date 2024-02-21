@@ -4,9 +4,9 @@ import productReducer from "./productReducer";
 import cartReducer from "./cartReducer";
 import categoryReducer from "./categoryReducer";
 import favoriteReducer from "./favoriteReducer";
+import { type Middleware } from "@reduxjs/toolkit";
 
-
-const UserMiddleware =(store)=>(next)=>(action)=>{
+const UserMiddleware:Middleware=(store)=>(next)=>(action:any)=>{
     
     next(action)
     
@@ -20,14 +20,14 @@ const UserMiddleware =(store)=>(next)=>(action)=>{
     if (action.type=='users/setUser') {
         const newState=store.getState()
         const {address,phoneNumber} = newState.user
-        const state=JSON.parse(localStorage.getItem('__user__'))
+        const state=JSON.parse(localStorage.getItem('__user__')||'')
         state.address=address
         state.phoneNumber=phoneNumber
         localStorage.setItem('__user__',JSON.stringify({...state}))
     }
 }
 
-const CartMiddleware =(store)=>(next)=>(action)=>{
+const CartMiddleware:Middleware =(store)=>(next)=>(action:any)=>{
     
     next(action)
     
@@ -46,7 +46,8 @@ export const store=configureStore({
         category:categoryReducer,
         favorite:favoriteReducer
     },
-    middleware:()=>[UserMiddleware,CartMiddleware]
+    middleware:(getDefaultMiddleware)=>{
+        return getDefaultMiddleware().concat(UserMiddleware,CartMiddleware)}
 })
 export type IStore=ReturnType<typeof store.getState>
 /* export interface IStore{
