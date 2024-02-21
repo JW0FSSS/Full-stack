@@ -24,6 +24,6 @@ export async function VerifyJwt(req:IRequest,res:Response,next:NextFunction) {
         
         next()
     } catch (error) {
-        throw new Error(`error: ${error}`);
+        res.status(403).json({error:'Token expired or incorrect'})
     }
 }
