@@ -1,7 +1,7 @@
 import { UserLogin, User } from "../types/User.d"
 
 export async function UserFetchRegister({username,email,password,address,image,phoneNumber}:User) {
-    const res=await fetch('https://full-stack-qpdq.onrender.com//register',{
+    const res=await fetch('https://good-games-25uj.onrender.com/register',{
         method:'post',
         headers:{
             'Content-type':'application/json'
@@ -14,7 +14,7 @@ export async function UserFetchRegister({username,email,password,address,image,p
 
 export async function UserFetchLogin({email,password}:UserLogin) {
         
-        const res=await fetch('https://full-stack-qpdq.onrender.com//login',{
+        const res=await fetch('https://good-games-25uj.onrender.com/login',{
             method:'post',
             headers:{
                 'Content-type':'application/json'
@@ -28,7 +28,7 @@ export async function UserFetchLogin({email,password}:UserLogin) {
 
 export async function UserFetchProfile({token}:{token:string}) {
         
-        const res=await fetch('https://full-stack-qpdq.onrender.com//profile',{
+        const res=await fetch('https://good-games-25uj.onrender.com/profile',{
             headers:{
                 'Content-type':'application/json',
                 'Authorization':`bearer ${token}` 
