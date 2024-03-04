@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IStore } from "../store/ConfigureStore"
 import { addCart, removeCart } from "../store/cartReducer"
@@ -9,19 +9,23 @@ import { IProduct } from "../types/product.d"
 import { ButtonFavorite } from "./AddFavoriteButton"
 import { FetchFavorite } from "../services/favorite"
 import { setFavorite } from "../store/favoriteReducer"
+import { Spinner } from "./spinner/spiner"
 
 export function CardProduct({cart}:{cart:IProduct[]}) {
 
     const products= useSelector((state:IStore)=>state.products)
     const favorite= useSelector((state:IStore)=>state.favorite)
+    const [loadCategories, setLoadCategories] = useState(false);
     const user= useSelector((state:IStore)=>state.user)
     const productDispatch=useDispatch()
     const favoriteDispatch=useDispatch()
 
     useEffect(()=>{
+        setLoadCategories(true)
         user.token
         ?FetchFavorite({token:user.token})
-        .then(res=>favoriteDispatch(setFavorite(res.product_id)))
+        .then(res=>{favoriteDispatch(setFavorite(res.product_id))
+        setLoadCategories(false)})
         :null
     },[])
 
@@ -34,7 +38,7 @@ export function CardProduct({cart}:{cart:IProduct[]}) {
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ">
-                        {products.length<1?
+                        {loadCategories?<Spinner/> :products.length<1?
                         <h1 className="text-white text-3xl col-span-4 text-center">Not found Products</h1>:
                         products.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)

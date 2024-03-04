@@ -3,15 +3,19 @@ import { IProduct } from "../types/product.d"
 import { useDispatch } from "react-redux"
 import { addCart, removeCart } from "../store/cartReducer"
 import { GetProductsId } from "../services/products"
+import {Spinner} from "./spinner/spiner"
 
 export function SectionOne({cart}:{cart:IProduct[]}) {
     const [first,setFirst]=useState([] as IProduct[])
+    const [loadCategories, setLoadCategories] = useState(false);
     const [dialog,setDialog]=useState(false)
     const useCart=useDispatch()
     
     useEffect(()=>{
+        setLoadCategories(true)
         GetProductsId({id:'65c3e8bad48e6c093c71d6a9'}).then(product=>{
             setFirst([product])
+            setLoadCategories(false)
         })
       },[])
 
@@ -22,7 +26,7 @@ export function SectionOne({cart}:{cart:IProduct[]}) {
     return(
         <section  className="bg-black/50 rounded-md py-10 lg:px-36 px-10 w-full lg:h-[400px] h-[500px]">  
                             <div className="flex lg:flex-row flex-col relative w-full h-full items-center">
-                            {first.map(product=>{
+                            {loadCategories?<Spinner/>:first.map(product=>{
                                 const filter=cart.some(e=>e._id==product._id)
                                 return(
                                     <>

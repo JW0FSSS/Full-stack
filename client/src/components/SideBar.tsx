@@ -14,15 +14,19 @@ import { Facebook } from "../icons/facebook";
 import { Instagram } from "../icons/instagram";
 import { Cart } from "../icons/cart";
 import { Store } from "../icons/store";
+import { Spinner } from "./spinner/spiner";
 
 export function SideBar() {
   const [open, setOpen] = useState(false);
+  const [loadCategories, setLoadCategories] = useState(false);
   const categories = useSelector((state: IStore) => state.category);
   const categoriesDispatch = useDispatch();
 
   useEffect(() => {
+    setLoadCategories(true)
     GetCategories().then((categories) => {
       categoriesDispatch(setCategory(categories));
+      setLoadCategories(false)
     });
   }, []);
 
@@ -121,7 +125,7 @@ export function SideBar() {
         <div className="">
           <h1 className="pb-7">Category</h1>
           <div className="flex flex-col gap-4 items-start">
-            {categories.map((category) => {
+            {loadCategories?<Spinner/>:categories.map((category) => {
               return (
                 <button key={category._id} className="flex gap-5">
                   <Game /> <p>{category.name}</p>
