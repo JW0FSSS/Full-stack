@@ -38,8 +38,9 @@ export function CardProduct({cart}:{cart:IProduct[]}) {
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ">
-                        {loadCategories?<Spinner/> :products.length<1?
+                        {products.length<1?
                         <h1 className="text-white text-3xl col-span-4 text-center">Not found Products</h1>:
+                        loadCategories?<Spinner/> :
                         products.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)
                             const filterFav=favorite.some(e=>e._id==product._id)
