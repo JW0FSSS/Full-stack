@@ -23,7 +23,7 @@ export function Favorite() {
         .then(data=>{
             favoriteDispatch(setFavorite(data.product_id))
         }
-        ).catch(e=>{favoriteDispatch(removeUser())})
+        ).catch(()=>{favoriteDispatch(removeUser())})
     },[])
     return(
         <section className="bg-black/70 min-h-screen ">
