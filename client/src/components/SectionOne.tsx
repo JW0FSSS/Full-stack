@@ -20,27 +20,27 @@ export function SectionOne({cart}:{cart:IProduct[]}) {
       }
 
     return(
-        <section  className="bg-black/50 rounded-md py-10 px-36 w-full h-[400px]">  
-                            <div className="flex relative w-full h-full">
+        <section  className="bg-black/50 rounded-md py-10 lg:px-36 px-10 w-full lg:h-[400px] h-[500px]">  
+                            <div className="flex lg:flex-row flex-col relative w-full h-full items-center">
                             {first.map(product=>{
                                 const filter=cart.some(e=>e._id==product._id)
                                 return(
                                     <>
-                                    <div className="flex flex-col w-full gap-10 items-start text-white/70">
+                                    <div className="flex flex-col w-full gap-10 lg:items-start text-white/70 lg:order-1 order-2 items-center">
                 
                                         <div>
                                             <span className="text-4xl ">{product.rate}****</span>
-                                            <h1 className="text-6xl text-white mb-3">{product.name}</h1>
+                                            <h1 className="lg:text-6xl text-4xl  text-white mb-3">{product.name}</h1>
                                             <h2 className="text-2xl mb-5">"{product.categories_id.map(e=>e.name)}"</h2>
                                             <div className="w-36 h-0 border border-black/40"></div>
                                              <p className="mt-5">{product.description}</p>
                                         </div>
                                         <div className="flex gap-5">
-                                            <button className={`py-4 px-10 ${filter?'bg-red-800 ':'bg-green-800'} rounded-2xl text-lg`} onClick={()=>{return filter?useCart(removeCart(product._id)):useCart(addCart(product))}}>{filter?'Remove Cart':'Add Cart'}</button>
-                                            <button className="py-4 px-10 bg-black/50 rounded-2xl text-lg " onClick={handleDialog}>See more</button>
+                                            <button className={`lg:py-4 py-2 lg:px-10 px-5 ${filter?'bg-red-800 ':'bg-green-800'} rounded-2xl lg:text-lg text-sm`} onClick={()=>{return filter?useCart(removeCart(product._id)):useCart(addCart(product))}}>{filter?'Remove Cart':'Add Cart'}</button>
+                                            <button className="lg:py-4 py-2 lg:px-10 px-5 bg-black/50 rounded-2xl lg:text-lg text-sm " onClick={handleDialog}>See more</button>
                                         </div>
                                     </div>
-                                    <img src={`${product.image}`} alt={`${product.description}`} className="absolute -top-20 right-20 w-2/5"/>
+                                    <img src={`${product.image}`} alt={`${product.description}`} className="lg:absolute -top-20 right-20  static lg:w-2/5 w-4/5 lg:order-2 order-1"/>
                                     </>
                                 )
                             })}

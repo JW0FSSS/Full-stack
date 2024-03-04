@@ -21,7 +21,7 @@ export function Profile() {
     
     return(
         
-        <section className="flex flex-col items-center h-screen gap-20 bg-black/60 ml-80">
+        <section className="flex flex-col items-center h-screen gap-20 bg-black/60 lg:ml-80">
             
             <SideBar/>
             <main className="flex flex-col justify-evenly items-start min-w-80 min-h-80 mx-auto mt-20 bg-black/80 rounded-lg text-white/80 pl-10">

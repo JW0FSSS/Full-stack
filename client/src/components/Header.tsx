@@ -20,12 +20,12 @@ export function Header() {
 
 
     return(
-        <header className="w-full flex justify-between mb-10 text-white/70">
+        <header className="w-full flex lg:justify-between justify-evenly mb-10 text-white/70">
             <form className="flex relative" onSubmit={handlefetch}>
                 <label htmlFor="search" className="absolute top-2 pl-2">
                         <Search />
                 </label>
-                <input type="text" placeholder="Search...." className="bg-transparent pr-20 pl-9 py-1" id="search" ref={text}/>   
+                <input type="text" placeholder="Search...." className="bg-transparent lg:pr-20 pr-0 pl-9 py-1" id="search" ref={text}/>   
             </form>
                 <div className="flex gap-5 items-center">
                     <p>{user.username?user.username.toUpperCase():'Login'}</p>

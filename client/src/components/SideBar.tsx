@@ -29,9 +29,9 @@ export function SideBar() {
   return (
     <>
       <button
-        className={`md:hidden fixed z-10 top-5 right-5 ${
+        className={`md:hidden fixed z-10 lgtop-5 lgright-5 top-3 right-3 ${
           open ? "bg-red-600/70 z-20 text-white" : "bg-white/90"
-        } rounded-full p-3`}
+        } rounded-full lg:p-3 p-2`}
         onClick={() => setOpen(!open)}
       >
         {open ? (

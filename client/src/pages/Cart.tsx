@@ -28,7 +28,7 @@ export function Cart() {
             {cart.map(product=>{
                 return(
                     <article className="grid grid-cols-5 place-items-center">
-                        <picture className="w-40">
+                        <picture className="lg:w-40 w-24">
                             <img src={`${product.image}`} alt={`${product.description}`} />
                         </picture>
                         
@@ -42,7 +42,7 @@ export function Cart() {
             <div className="grid grid-cols-5">
                 <p className="w-full my-10 col-start-5 text-center text-xl">${cart.reduce((prev,current)=>prev+(current.price*current.quantity),0)}</p>
             </div>
-              <button className="absolute top-8 -right-20 bg-green-800 p-2 rounded-full" onClick={handlePay}>Pay Here</button>
+              <button className="lg:absolute lg:top-8 -right-20 bg-green-800 p-2 rounded-full w-[80px] mx-auto" onClick={handlePay}>Pay Here</button>
             </main>
            
         </section>
