@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { Search } from "../icons/search"
 import { IStore } from "../store/ConfigureStore"
 import { GetProducts } from "../services/products"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { setProducts } from "../store/productReducer"
+import { removeUser } from "../store/usersReducer"
+import { Link } from "react-router-dom"
 
 export function Header() {
 
@@ -18,6 +20,10 @@ export function Header() {
         .then(res=>productDispatch(setProducts(res)))
     }
 
+    useEffect(()=>{
+        user.username?null:productDispatch(removeUser())
+    },[])
+
 
     return(
         <header className="w-full flex lg:justify-between justify-evenly mb-10 text-white/70">
@@ -28,8 +34,10 @@ export function Header() {
                 <input type="text" placeholder="Search...." className="bg-transparent lg:pr-20 pr-0 pl-9 py-1" id="search" ref={text}/>   
             </form>
                 <div className="flex gap-5 items-center">
-                    <p>{user.username?user.username.toUpperCase():'Login'}</p>
-                    <img className='rounded-full w-10' src={`${user.image?user.image:''}`} alt=""  />
+                    {user.username?user.username.toUpperCase():<Link to={"/login"} className="bg-black/40 p-1 px-2 rounded-xl">Login</Link>}
+                    <button className={`${user.image?'':'hidden'}`}>
+                        <img className={`rounded-full w-10 `} src={`${user.image?user.image:''}`} alt=""  />
+                    </button>
                 </div>
             </header>
     )

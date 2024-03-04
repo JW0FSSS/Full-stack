@@ -6,6 +6,7 @@ import { IStore } from "../store/ConfigureStore"
 import { SideBar } from "../components/SideBar"
 import { addCart, removeCart } from "../store/cartReducer"
 import { Plus } from "../icons/plus"
+import { removeUser } from "../store/usersReducer"
 
 export function Favorite() {
 
@@ -22,7 +23,7 @@ export function Favorite() {
         .then(data=>{
             favoriteDispatch(setFavorite(data.product_id))
         }
-        )
+        ).catch(e=>{favoriteDispatch(removeUser())})
     },[])
     return(
         <section className="bg-black/70 min-h-screen ">

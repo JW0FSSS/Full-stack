@@ -7,9 +7,10 @@ import { setProducts } from "../store/productReducer"
 import { Plus } from "../icons/plus"
 import { IProduct } from "../types/product.d"
 import { ButtonFavorite } from "./AddFavoriteButton"
-import { FetchFavorite } from "../services/favorite"
+import {  FetchFavoriteOk } from "../services/favorite"
 import { setFavorite } from "../store/favoriteReducer"
 import { Spinner } from "./spinner/spiner"
+import { removeUser } from "../store/usersReducer"
 
 export function CardProduct({cart}:{cart:IProduct[]}) {
 
@@ -22,8 +23,13 @@ export function CardProduct({cart}:{cart:IProduct[]}) {
 
     useEffect(()=>{
         user.token
-        ?FetchFavorite({token:user.token})
-        .then(res=>favoriteDispatch(setFavorite(res.product_id)))
+        ?FetchFavoriteOk({token:user.token})
+        .then(res=>{
+            if (!res.ok) {
+                productDispatch(removeUser())
+            }
+            return res.json()    
+        }).then(res=>favoriteDispatch(setFavorite(res.product_id)))
             :null
         },[])
         
