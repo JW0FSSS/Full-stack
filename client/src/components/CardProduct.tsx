@@ -21,26 +21,24 @@ export function CardProduct({cart}:{cart:IProduct[]}) {
     const favoriteDispatch=useDispatch()
 
     useEffect(()=>{
-        setLoadCategories(true)
         user.token
         ?FetchFavorite({token:user.token})
-        .then(res=>{favoriteDispatch(setFavorite(res.product_id))
-        setLoadCategories(false)})
-        :null
-    },[])
-
-    useEffect(()=>{
+        .then(res=>favoriteDispatch(setFavorite(res.product_id)))
+            :null
+        },[])
         
-        GetProducts({limit:8,filter:''}).then(products=>{
-          productDispatch(setProducts(products))        
-        })
-      },[])
+
+        useEffect(()=>{
+            setLoadCategories(true)
+            GetProducts({limit:8,filter:''}).then(products=>{
+                productDispatch(setProducts(products))        
+                setLoadCategories(false)})
+            },[])
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ">
-                        {products.length<1?
+                        {loadCategories?<Spinner/>:products.length<1?
                         <h1 className="text-white text-3xl col-span-4 text-center">Not found Products</h1>:
-                        loadCategories?<Spinner/> :
                         products.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)
                             const filterFav=favorite.some(e=>e._id==product._id)
