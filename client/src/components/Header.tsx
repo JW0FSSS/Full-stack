@@ -2,14 +2,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { Search } from "../icons/search"
 import { IStore } from "../store/ConfigureStore"
 import { GetProducts } from "../services/products"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { setProducts } from "../store/productReducer"
 import { removeUser } from "../store/usersReducer"
 import { Link } from "react-router-dom"
+import { setFavorite } from "../store/favoriteReducer"
 
 export function Header() {
 
     const user=useSelector((state:IStore)=>state.user)
+    const [logout,setLogout]=useState(false)
     const productDispatch=useDispatch()
     const text = useRef<HTMLInputElement>(null);
 
@@ -23,7 +25,10 @@ export function Header() {
     useEffect(()=>{
         user.username?null:productDispatch(removeUser())
     },[])
-
+    const handleLogout=()=>{
+        productDispatch(removeUser()) 
+        productDispatch(setFavorite([]))
+    }
 
     return(
         <header className="w-full flex lg:justify-between justify-evenly mb-10 text-white/70">
@@ -35,7 +40,8 @@ export function Header() {
             </form>
                 <div className="flex gap-5 items-center">
                     {user.username?user.username.toUpperCase():<Link to={"/login"} className="bg-black/40 p-1 px-2 rounded-xl">Login</Link>}
-                    <button className={`${user.image?'':'hidden'}`}>
+                    <button className={`${user.image?'':'hidden'} relative`} onClick={()=>{setLogout(!logout)}}>
+                        <button className={`${logout?'absolute':'hidden'} bg-black rounded-lg px-2 top-5 right-10 w-20`} onClick={handleLogout}>Log out</button>
                         <img className={`rounded-full w-10 `} src={`${user.image?user.image:''}`} alt=""  />
                     </button>
                 </div>
