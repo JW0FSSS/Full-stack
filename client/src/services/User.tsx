@@ -38,3 +38,16 @@ export async function UserFetchProfile({token}:{token:string}) {
         return data
     
 }
+
+export async function UserFetchProfileOk({token}:{token:string}) {
+        
+        const res=await fetch('https://good-games-25uj.onrender.com/profile',{
+            headers:{
+                'Content-type':'application/json',
+                'Authorization':`bearer ${token}` 
+            }
+        })
+        
+        return res
+    
+}

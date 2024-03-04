@@ -2,8 +2,8 @@ import { useEffect,  } from "react"
 import { IStore } from "../store/ConfigureStore"
 import { SideBar } from "../components/SideBar"
 import { useDispatch, useSelector } from "react-redux"
-import { UserFetchProfile } from "../services/User"
-import { setUser } from "../store/usersReducer"
+import {  UserFetchProfileOk } from "../services/User"
+import { removeUser, setUser } from "../store/usersReducer"
 
 export function Profile() {
 
@@ -11,10 +11,14 @@ export function Profile() {
     const userDispatch=useDispatch()
     
     useEffect(()=>{
-        UserFetchProfile({token:user.token})
-        .then(data=>{
-            userDispatch(setUser(data))
-        })
+        UserFetchProfileOk({token:user.token})
+        .then(res=>{
+            if (!res.ok) {
+               userDispatch(removeUser()) 
+            }
+            return res.json()
+            
+        }).then(data=>userDispatch(setUser(data)))
         
         
     },[])
