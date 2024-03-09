@@ -23,8 +23,8 @@ export function Register() {
    }
     
     return(
-        <section className="flex flex-col items-center h-screen gap-20  bg-slate-300">
-            <div className="mt-60 flex flex-col items-center bg-white py-10 px-20 rounded-lg shadow-2xl">
+        <section className="flex flex-col items-center h-screen gap-20 w-full bg-slate-300">
+            <div className="mt-60 flex flex-col items-center bg-white lg:py-10 lg:px-20 py-6 px-14 rounded-lg shadow-2xl">
                 <h1 className="text-4xl flex gap-2" >Good Games</h1>
                 {error.message?<p className="p-1 mt-4 bg-red-500 rounded-md" >{error.message}</p>:''}
                 <form onSubmit={handleRegister} className="flex flex-col max-w-lg gap-5 p-10">
