@@ -8,6 +8,7 @@ import { product } from "./routes/product";
 import { category } from "./routes/category";
 import { payment } from "routes/payment";
 import './config/enviroments'
+import { NoSleep } from "Utiles/mongoNoSleep";
 
 const app=express()
 
@@ -33,5 +34,7 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
 ConnectDB()
 .then(()=>{
     console.log('database connected');
-    app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`))})
+    app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`))
+    NoSleep()
+})
 .catch(e=>console.log(e))
