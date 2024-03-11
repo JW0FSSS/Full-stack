@@ -4,5 +4,6 @@ export async function NoSleep() {
     const res=await CategoryModel.find({})
     setInterval(()=>{
         console.log(res)
-    },420000)
+    },1200000)
+    
 }

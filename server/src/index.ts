@@ -1,7 +1,7 @@
 import express, { NextFunction,Request,Response } from "express";
 import cors from "cors";
 import { ErrorHand } from "./types/ErrorHand";
-import { ConnectDB } from "./config/database";
+import { ConnectDB, db } from "./config/database";
 import { user } from "./routes/user";
 import { favorite } from "./routes/favorite";
 import { product } from "./routes/product";
@@ -33,8 +33,13 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
 
 ConnectDB()
 .then(()=>{
-    console.log('database connected');
+    
+
+    db.on('error', console.error.bind(console, 'Error de conexión:'));
+    db.once('open', () => {
+        console.log('Conexión exitosa a MongoDB Atlas');
+        NoSleep()
+    });
     app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`))
-    NoSleep()
 })
 .catch(e=>console.log(e))
