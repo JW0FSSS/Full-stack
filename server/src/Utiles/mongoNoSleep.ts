@@ -1,7 +1,8 @@
 import { CategoryModel } from "schemas/categories"
 
-export function NoSleep() {
+export async function NoSleep() {
+    const res=await CategoryModel.find({})
     setInterval(()=>{
-    CategoryModel.find({})
-    },900000)
+        console.log(res)
+    },420000)
 }
