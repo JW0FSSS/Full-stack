@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IStore } from "../store/ConfigureStore"
 import { addCart, removeCart } from "../store/cartReducer"
@@ -7,12 +7,11 @@ import { IProduct } from "../types/product.d"
 import { ButtonFavorite } from "./AddFavoriteButton"
 import {  FetchFavoriteOk } from "../services/favorite"
 import { setFavorite } from "../store/favoriteReducer"
-import { Spinner } from "./spinner/spiner"
+
 import { removeUser } from "../store/usersReducer"
 
-export function CardProduct({cart,loading}:{cart:IProduct[],loading:boolean}) {
+export function CardProduct({cart,product:products}:{cart:IProduct[],product:IProduct[]}) {
 
-    const products= useSelector((state:IStore)=>state.products)
     const favorite= useSelector((state:IStore)=>state.favorite)
     const user= useSelector((state:IStore)=>state.user)
     const productDispatch=useDispatch()
@@ -30,9 +29,6 @@ export function CardProduct({cart,loading}:{cart:IProduct[],loading:boolean}) {
             :null
         },[])
         
-        if (loading) {
-            return <Spinner/>
-        }
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ">
@@ -56,10 +52,13 @@ export function CardProduct({cart,loading}:{cart:IProduct[],loading:boolean}) {
                                                 <Plus/>
                                             </div>    
                                             <p>{filter?'Remove Cart':'Add Cart'}</p>
-                                        </button>
+                                            </button>
+                                            {user.token?
                                             <div className={`absolute z-50 top-4 right-4`}>
                                                 <ButtonFavorite product={product} filterFav={filterFav} favoriteDispatch={favoriteDispatch}/>
-                                            </div>     
+                                            </div>:
+                                            null     
+                                            }
                                 </article>
                             )
                         })}

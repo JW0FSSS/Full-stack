@@ -1,27 +1,21 @@
 import { useEffect, useState } from "react"
 import { IProduct } from "../types/product.d"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { addCart, removeCart } from "../store/cartReducer"
-import {Spinner} from "./spinner/spiner"
-import { IStore } from "../store/ConfigureStore"
 
-export function SectionOne({cart,loading}:{cart:IProduct[],loading:boolean}) {
+export function SectionOne({cart,product}:{cart:IProduct[],product:IProduct[]}) {
     const [first,setFirst]=useState([] as IProduct[])
-    const products= useSelector((state:IStore)=>state.products)
     const [dialog,setDialog]=useState(false)
     const useCart=useDispatch()
     
       const handleDialog=( )=>{
         setDialog(!dialog)
       }
-      if (loading) {
-        return <Spinner/>
-      }
       useEffect(()=>{
-        const one=[...products][0]
-        setFirst([one])
-      },[])
-
+          const one=[...product][0]
+          setFirst([one])
+        },[])
+  
     return(
         <section  className="bg-black/50 rounded-md py-10 lg:px-36 px-10 w-full lg:h-[400px] h-[500px]">  
                             <div className="flex lg:flex-row flex-col relative w-full h-full items-center">
@@ -32,7 +26,6 @@ export function SectionOne({cart,loading}:{cart:IProduct[],loading:boolean}) {
                                     <div className="flex flex-col w-full gap-10 lg:items-start text-white/70 lg:order-1 order-2 items-center">
                 
                                         <div>
-                                            <span className="text-4xl ">{product.rate}****</span>
                                             <h1 className="lg:text-6xl text-4xl  text-white mb-3">{product.name}</h1>
                                             <h2 className="text-2xl mb-5">"{product.categories_id.map(e=>e.name)}"</h2>
                                             <div className="w-36 h-0 border border-black/40"></div>
