@@ -31,11 +31,11 @@ export async function GetProducts({limit,filter}:{limit:number,filter:string}) {
     
     try {
         if (filter=='') {
-            return ProductModel.find({}).limit(limit).populate('categories_id')
+            return ProductModel.find({}).limit(limit)
         }
         
         const regex= new RegExp(`^${filter}`,'i')
-        const products= await ProductModel.find({name:regex}).limit(limit).populate('categories_id')
+        const products= await ProductModel.find({name:regex}).limit(limit)
        
         return products
 
@@ -48,7 +48,7 @@ export async function GetProducts({limit,filter}:{limit:number,filter:string}) {
 export async function GetProductId({id}:{id:string}) {
     
     try {
-        const product= await ProductModel.findById({_id:id}).populate('categories_id')
+        const product= await ProductModel.findById({_id:id})
 
         if (!product) return {error:'products no exist'}
         
