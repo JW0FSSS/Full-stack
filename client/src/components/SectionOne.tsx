@@ -1,32 +1,31 @@
 import { useEffect, useState } from "react"
 import { IProduct } from "../types/product.d"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addCart, removeCart } from "../store/cartReducer"
-import { GetProductsId } from "../services/products"
 import {Spinner} from "./spinner/spiner"
+import { IStore } from "../store/ConfigureStore"
 
-export function SectionOne({cart}:{cart:IProduct[]}) {
+export function SectionOne({cart,loading}:{cart:IProduct[],loading:boolean}) {
     const [first,setFirst]=useState([] as IProduct[])
-    const [loadCategories, setLoadCategories] = useState(false);
+    const products= useSelector((state:IStore)=>state.products)
     const [dialog,setDialog]=useState(false)
     const useCart=useDispatch()
     
-    useEffect(()=>{
-        setLoadCategories(true)
-        GetProductsId({id:'65c3e8bad48e6c093c71d6a9'}).then(product=>{
-            setFirst([product])
-            setLoadCategories(false)
-        })
-      },[])
-
       const handleDialog=( )=>{
         setDialog(!dialog)
       }
+      if (loading) {
+        return <Spinner/>
+      }
+      useEffect(()=>{
+        const one=[...products][0]
+        setFirst([one])
+      },[])
 
     return(
         <section  className="bg-black/50 rounded-md py-10 lg:px-36 px-10 w-full lg:h-[400px] h-[500px]">  
                             <div className="flex lg:flex-row flex-col relative w-full h-full items-center">
-                            {loadCategories?<Spinner/>:first.map(product=>{
+                            {first.map(product=>{
                                 const filter=cart.some(e=>e._id==product._id)
                                 return(
                                     <>

@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IStore } from "../store/ConfigureStore"
 import { addCart, removeCart } from "../store/cartReducer"
-import { GetProducts } from "../services/products"
-import { setProducts } from "../store/productReducer"
 import { Plus } from "../icons/plus"
 import { IProduct } from "../types/product.d"
 import { ButtonFavorite } from "./AddFavoriteButton"
@@ -12,14 +10,13 @@ import { setFavorite } from "../store/favoriteReducer"
 import { Spinner } from "./spinner/spiner"
 import { removeUser } from "../store/usersReducer"
 
-export function CardProduct({cart}:{cart:IProduct[]}) {
+export function CardProduct({cart,loading}:{cart:IProduct[],loading:boolean}) {
 
     const products= useSelector((state:IStore)=>state.products)
     const favorite= useSelector((state:IStore)=>state.favorite)
-    const [loadCategories, setLoadCategories] = useState(false);
     const user= useSelector((state:IStore)=>state.user)
     const productDispatch=useDispatch()
-    const favoriteDispatch=useDispatch()
+    const favoriteDispatch=useDispatch()    
 
     useEffect(()=>{
         user.token
@@ -33,17 +30,13 @@ export function CardProduct({cart}:{cart:IProduct[]}) {
             :null
         },[])
         
-
-        useEffect(()=>{
-            setLoadCategories(true)
-            GetProducts({limit:8,filter:''}).then(products=>{
-                productDispatch(setProducts(products))        
-                setLoadCategories(false)})
-            },[])
+        if (loading) {
+            return <Spinner/>
+        }
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ">
-                        {loadCategories?<Spinner/>:products.length<1?
+                        {products.length<1?
                         <h1 className="text-white text-3xl col-span-4 text-center">Not found Products</h1>:
                         products.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)
