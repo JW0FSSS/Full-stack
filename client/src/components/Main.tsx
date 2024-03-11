@@ -7,8 +7,8 @@ import { SectionOne } from "./SectionOne";
 import { IStore } from "../store/ConfigureStore";
 import { useEffect, useState } from "react";
 import {  setProducts } from "../store/productReducer";
-import { GetProducts } from "../services/products";
 import { Spinner } from "./spinner/spiner";
+import { GetProductsMock } from "../servicesMock/productsMock.";
 
 export function Main() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ export function Main() {
   const productDispatch=useDispatch()
 
   useEffect(()=>{
-    GetProducts({limit:8,filter:''}).then(products=>{
+    GetProductsMock({limit:8,filter:''}).then(products=>{
       setLoading(false)
         productDispatch(setProducts(products))        
 })    

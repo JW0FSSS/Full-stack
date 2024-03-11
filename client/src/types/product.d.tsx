@@ -6,7 +6,7 @@ export interface IProduct {
     description?:string,
     quantity:number,
     rate?:number,
-    categories_id:[{
+    categories_id?:[{
         name:string,
         _id:string
     }]

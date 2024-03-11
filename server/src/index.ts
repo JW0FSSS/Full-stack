@@ -33,12 +33,9 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
 
 ConnectDB()
 .then(()=>{
-    
-
     db.on('error', console.error.bind(console, 'Error de conexión:'));
     db.once('open', () => {
         console.log('Conexión exitosa a MongoDB Atlas');
-        NoSleep()
     });
     app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`))
 })

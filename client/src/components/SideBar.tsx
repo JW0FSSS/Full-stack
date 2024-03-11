@@ -15,6 +15,7 @@ import { Instagram } from "../icons/instagram";
 import { Cart } from "../icons/cart";
 import { Store } from "../icons/store";
 import { Spinner } from "./spinner/spiner";
+import { GetCategoriesMock } from "../servicesMock/categoriesMock";
 
 export function SideBar() {
   const [open, setOpen] = useState(false);
@@ -24,7 +25,7 @@ export function SideBar() {
 
   useEffect(() => {
     setLoadCategories(true)
-    GetCategories().then((categories) => {
+    GetCategoriesMock().then((categories) => {
       categoriesDispatch(setCategory(categories));
       setLoadCategories(false)
     });
