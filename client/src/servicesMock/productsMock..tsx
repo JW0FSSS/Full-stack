@@ -8,6 +8,6 @@ export async function GetProductsMock({limit=0,filter=''}:{limit:number,filter:s
             const filterProducts=filter?products.filter(e=>e.name.startsWith(filter)):products
             const limitProducts=limit?filterProducts.filter((e,i)=>i<limit):products
             res(limitProducts)
-        },1000)
+        },300)
     })
 }

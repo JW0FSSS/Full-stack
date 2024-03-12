@@ -5,6 +5,6 @@ export async function GetCategoriesMock():Promise<ICategory[]>{
     return new Promise((res,rej)=>{
         setTimeout(()=>{
             res(categories)
-        },1000)
+        },300)
     })
 }
