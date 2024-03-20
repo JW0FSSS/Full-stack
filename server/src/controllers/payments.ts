@@ -24,8 +24,8 @@ export async function PaymentController(req:Request,res:Response) {
     const session=await stripe.checkout.sessions.create({
         line_items:lineItems,
         mode:'payment',
-        success_url:'http://localhost:5173',
-        cancel_url:'http://localhost:3000',
+        success_url:'https://goodgamesv1.vercel.app/',
+        cancel_url:'https://goodgamesv1.vercel.app/',
     })
 
     res.json(session.url)
