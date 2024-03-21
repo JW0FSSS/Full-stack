@@ -31,7 +31,7 @@ export async function GetProducts({limit,filter}:{limit:number,filter:string}) {
     
     try {
         if (filter=='') {
-            return ProductModel.find({}).limit(limit)
+            return await ProductModel.find({}).limit(limit)
         }
         
         const regex= new RegExp(`^${filter}`,'i')
