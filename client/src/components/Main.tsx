@@ -29,7 +29,7 @@ if (loading) {
   setInterval(()=>{
     setTime(time-1)
   },1000)
-  return <h1 className="text-center text-black">{time}</h1>
+  return <h1 className="text-center text-white">wait {time} seconds....</h1>
 }
   return (
     <section className="md:ml-80 pl-10 pr-14 pt-7 pb-10 bg-black/80 min-h-screen z-10">
