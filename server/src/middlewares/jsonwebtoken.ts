@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 export interface IPayload {
-    id: string;
+    id: number;
     iat: number;
 } 
 export interface IRequest extends Request{
@@ -20,7 +20,7 @@ export async function VerifyJwt(req:IRequest,res:Response,next:NextFunction) {
         
         if (!payload) return res.send({error:'user prohibided'}).status(303)
             
-        req.id=payload.id
+        req.id=Number(payload.id)
         
         next()
     } catch (error) {

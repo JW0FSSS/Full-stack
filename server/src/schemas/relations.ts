@@ -44,7 +44,14 @@ name:{
 }
 },{timestamps:true})
 
-export const FavoriteModel=sequelize.define('Favorite',{},{timestamps:true})
+export const FavoriteModel=sequelize.define('Favorite',{
+    id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:true,
+        allowNull:false
+    }
+},{timestamps:true})
 
 export const UserModel=sequelize.define('User',
 {

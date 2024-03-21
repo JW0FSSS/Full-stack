@@ -7,8 +7,8 @@ export async function AddFavoriteController(req:IRequest,res:Response) {
    try {
     const id=req.id
     const {product_id}=req.body
-
-    const data= await AddFavorite({product_id,user_id:id||''})
+      
+    const data= await AddFavorite({product_id,user_id:id})
 
     res.json(data)
 
@@ -22,7 +22,7 @@ export async function DeleteFavoriteController(req:IRequest,res:Response) {
     const id=req.id
     const {product_id}=req.body
 
-    const data= await DeleteFavorite({product_id,user_id:id||''})
+    const data= await DeleteFavorite({product_id,user_id:id})
 
     res.json(data)
 
@@ -36,7 +36,7 @@ export async function FavoriteIdController(req:IRequest,res:Response) {
    try {
       
       const id=req.id
-    const data= await FavoriteId({user_id:id||''})
+    const data= await FavoriteId({user_id:id})
 
     res.json(data)
 

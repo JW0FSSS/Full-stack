@@ -8,6 +8,7 @@ import { product } from "./routes/product";
 import { category } from "./routes/category";
 import { payment } from "routes/payment";
 import './config/enviroments'
+import { Inserts } from "config/Insert";
 
 const app=express()
 
@@ -29,10 +30,10 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
     res.send({err:err.message}).status(err.status || 500)
 })
 
-
 ConnectDB()
 .then(()=>{
-    sequelize.sync({force:true})
-    app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`))
+    sequelize.sync()
 })
+.then(()=>Inserts())
+.then(()=>app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`)))
 .catch(e=>console.log(e))

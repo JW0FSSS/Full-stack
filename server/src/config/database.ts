@@ -8,7 +8,7 @@ export const db = mongoose.connection;
 }
  */
 
-export const sequelize=new Sequelize("mysql://root@localhost:3306/goodgames")
+export const sequelize=new Sequelize(process.env.DB_URL)
 
 export async function ConnectDB() {
     await sequelize.authenticate()

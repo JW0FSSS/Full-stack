@@ -2,7 +2,7 @@
 import { ProductModel } from "schemas/relations";
 import { Product } from "types/product";
 
-export async function CreateProduct({categories_id,name,price,quantity,description,image}:Product) {
+export async function CreateProduct({name,price,quantity,description,image,CategoryId}:Product) {
     
     try {
         const product= await ProductModel.findOne({where:{name}})
@@ -15,7 +15,7 @@ export async function CreateProduct({categories_id,name,price,quantity,descripti
             image:image||'',
             price,
             quantity,
-            categories_id
+            CategoryId
         })
 
 
@@ -30,7 +30,8 @@ export async function GetProducts({limit,filter}:{limit:number,filter:string}) {
     
     try {
         if (filter=='') {
-            return await ProductModel.findAll({limit})
+            const products=await ProductModel.findAll({limit})
+            return products
         }
         const products= await ProductModel.findAll({where:{name:{[Op.like]:filter}}})
        
@@ -45,7 +46,7 @@ export async function GetProducts({limit,filter}:{limit:number,filter:string}) {
 export async function GetProductId({id}:{id:string}) {
     
     try {
-        const product= await ProductModel.findById({_id:id})
+        const product= await ProductModel.findByPk(id)
 
         if (!product) return {error:'products no exist'}
         

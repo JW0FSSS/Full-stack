@@ -7,6 +7,6 @@ import { Types } from "mongoose";
     description?:string,
     quantity:number,
     rate?:number,
-    categories_id:Types.ObjectId
+    CategoryId:number
 }
 

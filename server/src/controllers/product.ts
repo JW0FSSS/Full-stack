@@ -4,9 +4,9 @@ import { CreateProduct, GetProductId, GetProducts } from "services/product";
 export async function CreateProductController(req:Request,res:Response) {
     
     try {
-        const {categories_id,name,price,quantity,description,image}=req.body
+        const {name,price,quantity,description,image,CategoryId}=req.body
 
-        const data = await CreateProduct({categories_id,name,price,quantity,description,image})
+        const data = await CreateProduct({name,price,quantity,description,image,CategoryId})
 
         res.json(data)
 
@@ -19,7 +19,7 @@ export async function GetProductController(req:Request,res:Response) {
     
     try {
 
-        const {limit=0,filter=''}=req.query
+        const {limit=8,filter=''}=req.query
 
         const data = await GetProducts({limit,filter})
 

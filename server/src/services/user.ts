@@ -21,7 +21,7 @@ export async function Register({email,password,username,address,phoneNumber,imag
             username,
             password:passwordEncrypt,
             image:image||'',
-            address:address||{street:'',city:'',state:''},
+            address:address,
             phoneNumber:phoneNumber||'',
         })
 
@@ -34,14 +34,14 @@ export async function Register({email,password,username,address,phoneNumber,imag
 export async function Login({email,password}:UserLogin) {
     try {
 
-        const user =await UserModel.findOne({where:{email},attributes:['image', 'username' ,'password']})
+        const user =await UserModel.findOne({where:{email},attributes:["id",'image', 'username' ,'password']})
 
         if (!user) return {error:'email or password are incorrects'}
         const parseUser=user.toJSON()
         const VerifyPassword= await bcrypt.compare(password,parseUser.password)
 
         if (!VerifyPassword) return {error:'email or password are incorrects'}
-
+        
         const jsonwebtoken=await jwt.sign({id:parseUser.id},process.env.JWT_ENCODED||'holaa',{algorithm:'HS256',expiresIn:'3h'})
 
         return {token:jsonwebtoken,image:parseUser.image,username:parseUser.username}
