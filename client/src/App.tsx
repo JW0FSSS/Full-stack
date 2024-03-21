@@ -9,14 +9,9 @@ import {Favorite } from "./pages/Favorite";
 import { Profile } from "./pages/Profile";
 import { Protected } from "./pages/ProtectedProfile";
 import { ProtectedAccount } from "./pages/ProtectedProfile copy";
-import { useEffect } from "react";
-import { GetCategories } from "./services/categories";
+
 
 function App() {
-  useEffect(()=>{
-    GetCategories()
-  },[])
-
   return (
     <>
     <Routes>
