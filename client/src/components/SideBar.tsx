@@ -18,6 +18,7 @@ import { Spinner } from "./spinner/spiner";
 
 export function SideBar() {
   const [open, setOpen] = useState(false);
+  const [time, setTime] = useState(50);
   const [loadCategories, setLoadCategories] = useState(false);
   const categories = useSelector((state: IStore) => state.category);
   const categoriesDispatch = useDispatch();
@@ -29,7 +30,12 @@ export function SideBar() {
       setLoadCategories(false)
     });
   }, []);
-
+  if (loadCategories) {
+    setInterval(()=>{
+      setTime(time-1)
+    },1000)
+    return <h1 className="text-center text-black">{time}</h1>
+  }
   return (
     <>
       <button
@@ -125,7 +131,7 @@ export function SideBar() {
         <div className="">
           <h1 className="pb-7">Category</h1>
           <div className="flex flex-col gap-4 items-start">
-            {loadCategories?<Spinner/>:categories.map((category) => {
+            {categories.map((category) => {
               return (
                 <button key={category._id} className="flex gap-5">
                   <Game /> <p>{category.name}</p>

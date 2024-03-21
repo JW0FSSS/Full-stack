@@ -12,6 +12,7 @@ import { GetProducts } from "../services/products";
 
 export function Main() {
   const [open, setOpen] = useState(false);
+  const [time, setTime] = useState(50);
   const cart = useSelector((state: IStore) => state.cart);
   const product = useSelector((state: IStore) => state.products);
   const [loading, setLoading] = useState(true);
@@ -23,8 +24,12 @@ export function Main() {
         productDispatch(setProducts(products))        
 })    
     },[])
+
 if (loading) {
-  return <h1 className="text-center text-black"><Spinner/></h1>
+  setInterval(()=>{
+    setTime(time-1)
+  },1000)
+  return <h1 className="text-center text-black">{time}</h1>
 }
   return (
     <section className="md:ml-80 pl-10 pr-14 pt-7 pb-10 bg-black/80 min-h-screen z-10">
