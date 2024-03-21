@@ -28,7 +28,7 @@ export function Favorite() {
     return(
         <section className="bg-black/70 min-h-screen ">
             <SideBar/>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:ml-80 p-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:ml-80 p-10">
                         {favorite.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)
                             return(
