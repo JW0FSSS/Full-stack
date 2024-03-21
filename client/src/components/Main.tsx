@@ -12,7 +12,7 @@ import { GetProducts } from "../services/products";
 
 export function Main() {
   const [open, setOpen] = useState(false);
-  const [time, setTime] = useState(50);
+  const [time, setTime] = useState(53);
   const cart = useSelector((state: IStore) => state.cart);
   const product = useSelector((state: IStore) => state.products);
   const [loading, setLoading] = useState(true);
@@ -27,9 +27,9 @@ export function Main() {
 
 if (loading) {
   setInterval(()=>{
-    setTime(time-1)
+    setTime(time=>(time-1))
   },1000)
-  return <h1 className="text-center text-white">wait {time} seconds....</h1>
+  return <h1 className="text-center text-white text-xl">wait {time} seconds....</h1>
 }
   return (
     <section className="md:ml-80 pl-10 pr-14 pt-7 pb-10 bg-black/80 min-h-screen z-10">
