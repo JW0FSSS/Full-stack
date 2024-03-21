@@ -14,7 +14,7 @@ import { GetCategories } from "./services/categories";
 
 function App() {
   useEffect(()=>{
-    GetCategories().then()
+    GetCategories()
   },[])
 
   return (
