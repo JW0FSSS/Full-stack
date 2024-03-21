@@ -23,12 +23,15 @@ export function Main() {
       setLoading(false)
         productDispatch(setProducts(products))        
       })    
-        const int=setInterval(()=>{
+      let int
+      if (loading) { 
+        int= setInterval(()=>{
           setTime(time=>(time-1))
         },1000)
+      }
 
         return ()=>clearInterval(int)
-    },[])
+    },[time])
 
 if (loading) {
   
