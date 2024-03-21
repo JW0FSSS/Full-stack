@@ -19,7 +19,7 @@ export function Main() {
   const productDispatch=useDispatch()
 
   useEffect(()=>{
-    GetProducts({limit:8,filter:''}).then(products=>{
+    GetProductsMock({limit:8,filter:''}).then(products=>{
       setLoading(false)
         productDispatch(setProducts(products))        
 })    
