@@ -1,14 +1,14 @@
 import express, { NextFunction,Request,Response } from "express";
 import cors from "cors";
 import { ErrorHand } from "./types/ErrorHand";
-import { ConnectDB, db } from "./config/database";
+import { ConnectDB } from "./config/database";
 import { user } from "./routes/user";
 import { favorite } from "./routes/favorite";
 import { product } from "./routes/product";
 import { category } from "./routes/category";
 import { payment } from "routes/payment";
+import schedule from "node-schedule"
 import './config/enviroments'
-import { NoSleep } from "Utiles/mongoNoSleep";
 
 const app=express()
 
@@ -30,13 +30,23 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
     res.send({err:err.message}).status(err.status || 500)
 })
 
+schedule.scheduleJob('*/13 * * * *', function(){
+    fetch('http://localhost:3000/category',{
+        method:'get',
+        headers:{
+            'Content-type':'application/json'
+        }
+    })
+    .then(data=>data.json())
+    .then(res=>res.length>0?console.log(':)'):console.log(':('))
+    .catch(error => {
+        console.error('Error al realizar la solicitud:', error);
+    });
+  });
+
 
 ConnectDB()
 .then(()=>{
-    db.on('error', console.error.bind(console, 'Error de conexión:'));
-    db.once('open', () => {
-        console.log('Conexión exitosa a MongoDB Atlas');
-    });
     app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`))
 })
 .catch(e=>console.log(e))
