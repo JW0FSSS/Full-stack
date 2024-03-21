@@ -22,13 +22,16 @@ export function Main() {
     GetProducts({limit:8,filter:''}).then(products=>{
       setLoading(false)
         productDispatch(setProducts(products))        
-})    
+      })    
+        const int=setInterval(()=>{
+          setTime(time=>(time-1))
+        },1000)
+
+        return ()=>clearInterval(int)
     },[])
 
 if (loading) {
-  setInterval(()=>{
-    setTime(time=>(time-1))
-  },1000)
+  
   return <h1 className="text-center text-white text-xl">wait {time} seconds....</h1>
 }
   return (
