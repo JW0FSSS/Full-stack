@@ -25,7 +25,7 @@ export function SideBar() {
 
   useEffect(() => {
     setLoadCategories(true)
-    GetCategoriesMock().then((categories) => {
+    GetCategories().then((categories) => {
       categoriesDispatch(setCategory(categories));
       setLoadCategories(false)
     });
