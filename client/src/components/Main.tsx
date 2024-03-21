@@ -17,7 +17,7 @@ export function Main() {
   const product = useSelector((state: IStore) => state.products);
   const [loading, setLoading] = useState(true);
   const productDispatch=useDispatch()
-
+  
   useEffect(()=>{
     GetProducts({limit:8,filter:''}).then(products=>{
       setLoading(false)
@@ -32,7 +32,7 @@ export function Main() {
 
 if (loading) {
   
-  return <h1 className="text-center text-white text-xl">wait {time} seconds....</h1>
+  return <h1 className="text-center text-black text-2xl">wait {time} seconds....</h1>
 }
   return (
     <section className="md:ml-80 pl-10 pr-14 pt-7 pb-10 bg-black/80 min-h-screen z-10">
