@@ -30,7 +30,7 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
     res.send({err:err.message}).status(err.status || 500)
 })
 
-schedule.scheduleJob('*/13 * * * *', function(){
+schedule.scheduleJob('*/6 * * * *', function(){
     fetch('http://localhost:3000/category',{
         method:'get',
         headers:{
