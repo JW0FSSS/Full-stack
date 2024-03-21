@@ -1,15 +1,15 @@
 
-import { ProductModel } from "schemas/products";
+import { ProductModel } from "schemas/relations";
 import { Product } from "types/product";
 
 export async function CreateProduct({categories_id,name,price,quantity,description,image}:Product) {
     
     try {
-        const product= await ProductModel.findOne({name})
+        const product= await ProductModel.findOne({where:{name}})
         
         if (product) return {error:'products name is alreadry exist'}
         
-        const newProduct= new ProductModel({
+        const newProduct= await ProductModel.create({
             name,
             description:description||'',
             image:image||'',
@@ -18,9 +18,8 @@ export async function CreateProduct({categories_id,name,price,quantity,descripti
             categories_id
         })
 
-        const savedProduct=await newProduct.save()
 
-        return savedProduct
+        return newProduct.toJSON()
     } catch (error) {
         throw new Error(`error : ${error}`);
     }
@@ -31,11 +30,9 @@ export async function GetProducts({limit,filter}:{limit:number,filter:string}) {
     
     try {
         if (filter=='') {
-            return ProductModel.find({}).limit(limit)
+            return await ProductModel.findAll({limit})
         }
-        
-        const regex= new RegExp(`^${filter}`,'i')
-        const products= await ProductModel.find({name:regex}).limit(limit)
+        const products= await ProductModel.findAll({where:{name:{[Op.like]:filter}}})
        
         return products
 

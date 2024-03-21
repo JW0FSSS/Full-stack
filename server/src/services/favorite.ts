@@ -1,12 +1,12 @@
 
 import { Types } from "mongoose";
-import { FavoriteModel } from "schemas/Favorites";
+import { FavoriteModel } from "schemas/relations";
 import { Favorite } from "types/favorite";
 
 export async function AddFavorite({product_id,user_id}:Favorite) {
     
     try {
-        const favorite= await FavoriteModel.findOne({user_id})
+        const favorite= await FavoriteModel.findAll({where:{Userid:user_id}})
         
         if (!favorite) return {error:'error when reference user'}
 

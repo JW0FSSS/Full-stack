@@ -1,22 +1,19 @@
 import { Types } from "mongoose";
-import { CategoryModel } from "schemas/categories";
-import { ProductModel } from "schemas/products";
+import { CategoryModel, ProductModel } from "schemas/relations";
 import { Category } from "types/category";
 
 export async function CreateCategory({name}:Category) {
     
     try {
-        const category= await CategoryModel.findOne({name})
+        const category= await CategoryModel.findOne({where:{name}})
         
         if (category) return {error:'category name is alreadry exist'}
         
-        const newCategory= new CategoryModel({
+        const newCategory= await CategoryModel.create({
             name
         })
 
-        const savedCategory=await newCategory.save()
-
-        return savedCategory
+        return newCategory.toJSON()
     } catch (error) {
         throw new Error(`error : ${error}`);
     }
@@ -26,7 +23,7 @@ export async function CreateCategory({name}:Category) {
 export async function GetCategory() {
     
     try {
-        const categories= await CategoryModel.find({})
+        const categories= await CategoryModel.findAll()
         
         return categories
 
@@ -39,11 +36,11 @@ export async function GetCategory() {
 export async function GetCategoryId({id}:{id:string}) {
     
     try {
-        const category= await ProductModel.findById({_id:id})
+        const category= await ProductModel.findByPk(id)
 
         if (!category) return {error:'category no exist'}
         
-        return category
+        return category.toJSON()
 
     } catch (error) {
         throw new Error(`error : ${error}`);

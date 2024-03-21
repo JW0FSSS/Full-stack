@@ -1,14 +1,13 @@
 import express, { NextFunction,Request,Response } from "express";
 import cors from "cors";
 import { ErrorHand } from "./types/ErrorHand";
-import { ConnectDB, db } from "./config/database";
+import { ConnectDB, db, sequelize } from "./config/database";
 import { user } from "./routes/user";
 import { favorite } from "./routes/favorite";
 import { product } from "./routes/product";
 import { category } from "./routes/category";
 import { payment } from "routes/payment";
 import './config/enviroments'
-import { NoSleep } from "Utiles/mongoNoSleep";
 
 const app=express()
 
@@ -33,10 +32,7 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
 
 ConnectDB()
 .then(()=>{
-    db.on('error', console.error.bind(console, 'Error de conexión:'));
-    db.once('open', () => {
-        console.log('Conexión exitosa a MongoDB Atlas');
-    });
+    sequelize.sync({force:true})
     app.listen(process.env.PORT||3000,()=>console.log(`server on ... http://localhost:${process.env.PORT||3000}`))
 })
 .catch(e=>console.log(e))

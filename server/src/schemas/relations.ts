@@ -36,8 +36,45 @@ import { DataTypes } from "sequelize";
 },{timestamps:true})
 
 export const ProductModel= model('Product',ProductsSchema) */
+export const CategoryModel=sequelize.define('Category',
+{
+name:{
+    type:DataTypes.STRING,
+    allowNull:false,
+}
+},{timestamps:true})
 
-/* export const ProductModel=sequelize.define('Product',
+export const FavoriteModel=sequelize.define('Favorite',{},{timestamps:true})
+
+export const UserModel=sequelize.define('User',
+{
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    username:{
+        type:DataTypes.STRING,
+        unique:true,
+        allowNull:false
+    },
+    address: {
+        type: DataTypes.STRING,
+    },
+    image:{
+        type:DataTypes.STRING,
+    },
+    phoneNumber: DataTypes.STRING,
+/*     orders: {
+        type: DataTypes.INTEGER,
+    } */
+})
+
+export const ProductModel=sequelize.define('Product',
 {
     name: {
         type: DataTypes.STRING,
@@ -65,4 +102,10 @@ export const ProductModel= model('Product',ProductsSchema) */
     },
 },{
     timestamps:true
-}) */
+})
+
+CategoryModel.hasMany(ProductModel)
+ProductModel.belongsTo(CategoryModel)
+
+UserModel.belongsToMany(ProductModel,{through:FavoriteModel})
+ProductModel.belongsToMany(UserModel,{through:FavoriteModel})

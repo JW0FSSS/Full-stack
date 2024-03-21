@@ -1,22 +1,22 @@
 import { UserRegister,UserLogin } from "../types/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { FavoriteModel } from "schemas/Favorites";
-import { UserModel } from "schemas/User";
+import { FavoriteModel } from "schemas/relations";
+import { UserModel } from "schemas/relations";
 
 export async function Register({email,password,username,address,phoneNumber,image}:UserRegister) {
     try {
-        const user =await UserModel.findOne({email})
+        const user =await UserModel.findOne({where:{email}})
 
         if (user) return {error:'email is already used'}
 
-        const nickname =await UserModel.findOne({username})
+        const nickname =await UserModel.findOne({where:{username}})
 
         if (nickname) return {error:'nickname is already used'}
 
         const passwordEncrypt= await bcrypt.hash(password,10)
         
-        const newUser= new UserModel({
+        await UserModel.create({
             email,
             username,
             password:passwordEncrypt,
@@ -24,10 +24,6 @@ export async function Register({email,password,username,address,phoneNumber,imag
             address:address||{street:'',city:'',state:''},
             phoneNumber:phoneNumber||'',
         })
-
-        await newUser.save()
-
-        await FavoriteModel.create({user_id:newUser._id,product_id:[]})
 
         return {message:'user created succesfully'}
     } catch (error) {
@@ -38,17 +34,17 @@ export async function Register({email,password,username,address,phoneNumber,imag
 export async function Login({email,password}:UserLogin) {
     try {
 
-        const user =await UserModel.findOne({email}).select('image username password')
+        const user =await UserModel.findOne({where:{email},attributes:['image', 'username' ,'password']})
 
         if (!user) return {error:'email or password are incorrects'}
-
-        const VerifyPassword= await bcrypt.compare(password,user.password)
+        const parseUser=user.toJSON()
+        const VerifyPassword= await bcrypt.compare(password,parseUser.password)
 
         if (!VerifyPassword) return {error:'email or password are incorrects'}
 
-        const jsonwebtoken=await jwt.sign({id:user._id},process.env.JWT_ENCODED||'holaa',{algorithm:'HS256',expiresIn:'3h'})
+        const jsonwebtoken=await jwt.sign({id:parseUser.id},process.env.JWT_ENCODED||'holaa',{algorithm:'HS256',expiresIn:'3h'})
 
-        return {token:jsonwebtoken,image:user.image,username:user.username}
+        return {token:jsonwebtoken,image:parseUser.image,username:parseUser.username}
 
     } catch (error) {
         throw new Error(`error : ${error}`);
@@ -58,8 +54,7 @@ export async function Login({email,password}:UserLogin) {
 export async function Profile({id}:{id:string}) {
     try {
 
-        const user =await UserModel.findById({_id:id}).select('email username address image phoneNumber')
-
+        const user =await UserModel.findByPk(id)
         if (!user) return {error:'forbidden'}
 
         return user

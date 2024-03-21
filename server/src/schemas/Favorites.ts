@@ -1,6 +1,8 @@
+import { sequelize } from "config/database";
 import { Schema,model } from "mongoose";
+import { DataTypes } from "sequelize";
 
-const FavoriteSchema=new Schema({
+/* const FavoriteSchema=new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
         ref:'User',
@@ -12,4 +14,7 @@ const FavoriteSchema=new Schema({
     }]
 },{timestamps:true})
 
-export const FavoriteModel= model('Favorite',FavoriteSchema)
+export const FavoriteModel= model('Favorite',FavoriteSchema) */
+
+/* export const FavoriteModel=sequelize.define('Favorite',{},{timestamps:true})
+ */
