@@ -38,20 +38,20 @@ export function CardProduct({cart,product:products}:{cart:IProduct[],product:IPr
                             const filter=cart.some(e=>e._id==product._id)
                             const filterFav=favorite.some(e=>e._id==product._id)
                             return(
-                                <article key={product._id} className="bg-black/70 rounded-md flex flex-col items-center py-3 px-10 gap-4 text-white/80 relative z-0">
+                                <article key={product._id} className="bg-[#28282a] rounded-md flex flex-col group items-center hover:shadow-md py-3 px-10 gap-4 text-white/80 relative border-[1px] border-transparent z-0  hover:border-white/80 transition-color ease-in-out ">
                                     <div className="-mt-10 w-60 h-60 overflow-hidden grid place-content-center">
                                         <img src={`${product.image}`} alt={`${product.description}`}  />
                                     </div>
                                     <div className="mb-5 flex flex-col items-center gap-4">
-                                        <h1 className="text-white">{product.name}</h1>
+                                        <h1 className="text-white font-bold">{product.name}</h1>
                                         <h2 className="text-center">{product.description}</h2>
-                                        <span className="text-green-700 text-xl">{product.price}$</span>
+                                        <span className="text-[#9965f0] text-xl font-semibold">{product.price}$</span>
                                     </div>
                                         <button key={product._id+"b"} className="flex gap-5 mb-5" onClick={()=>{return filter?productDispatch(removeCart(product._id)):productDispatch(addCart(product))}}>
-                                            <div className={` rounded-full border-2 ${filter?'border-red-800 text-red-600':'border-green-800 text-green-600'}`}>
+                                            <div className={` rounded-full border-[1px]    ${filter?'border-[#b94747] text-[#b94747] group-hover:bg-[#b94747] group-hover:text-white':'border-[#9965f0] text-[#9965f0] group-hover:text-white group-hover:bg-[#9965f0]'}`}>
                                                 <Plus/>
                                             </div>    
-                                            <p>{filter?'Remove Cart':'Add Cart'}</p>
+                                            <p className="text-white font-semibold">{filter?'Remove Cart':'Add to Cart'}</p>
                                             </button>
                                             {user.token?
                                             <div className={`absolute z-50 top-4 right-4`}>

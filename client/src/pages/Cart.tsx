@@ -42,7 +42,7 @@ export function Cart() {
             <div className="grid grid-cols-5">
                 <p className="w-full my-10 col-start-5 text-center text-xl">${cart.reduce((prev,current)=>prev+(current.price*current.quantity),0)}</p>
             </div>
-              <button className="lg:absolute lg:top-8 -right-20 bg-green-800 p-2 rounded-full w-[80px] mx-auto" onClick={handlePay} disabled={cart.length<1?true:false}>Pay Here</button>
+              <button className="lg:absolute lg:top-8 -right-20 bg-[#895bd3] p-2 text-white font-semibold rounded-full w-[100px] mx-auto" onClick={handlePay} disabled={cart.length<1?true:false}>Pay Here</button>
             </main>
            
         </section>

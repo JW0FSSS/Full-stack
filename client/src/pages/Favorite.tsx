@@ -32,17 +32,17 @@ export function Favorite() {
                         {favorite.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)
                             return(
-                                <article key={product._id} className="bg-black/70 rounded-md flex flex-col items-center py-3 px-10 gap-4 text-white/80">
+                                <article key={product._id} className="bg-[#28282a] rounded-md flex flex-col items-center py-3 px-10 gap-4 text-white/80">
                                     <div className="-mt-10 w-60 h-60 overflow-hidden grid place-content-center">
                                         <img src={`${product.image}`} alt={`${product.description}`}  />
                                     </div>
                                     <div className="mb-5 flex flex-col items-center gap-4">
                                         <h1 className="text-white">{product.name}</h1>
                                         <h2 className="text-center">{product.description}</h2>
-                                        <span className="text-green-700 text-xl">{product.price}$</span>
+                                        <span className="text-[#9965f0] text-xl">{product.price}$</span>
                                     </div>
                                     <button className="flex gap-5 mb-5" onClick={()=>{return filter?productDispatch(removeCart(product._id)):productDispatch(addCart(product))}}>
-                                            <div className={` rounded-full border-2 ${filter?'border-red-800 text-red-600':'border-green-800 text-green-600'}`}>
+                                            <div className={` rounded-full border-2   ${filter?'border-[#b94747] text-[#b94747] group-hover:bg-[#b94747] group-hover:text-white':'border-[#9965f0] text-[#9965f0] group-hover:text-white group-hover:bg-[#9965f0]'}`}>
                                                 <Plus/>
                                             </div>    
                                             <p>{filter?'Remove Cart':'Add Cart'}</p>

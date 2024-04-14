@@ -30,9 +30,9 @@ export function SectionOne({cart,product}:{cart:IProduct[],product:IProduct[]}) 
                                             <div className="w-36 h-0 border border-black/40"></div>
                                              <p className="mt-5">{product.description}</p>
                                         </div>
-                                        <div className="flex gap-5">
-                                            <button className={`lg:py-4 py-2 lg:px-10 px-5 ${filter?'bg-red-800 ':'bg-green-800'} rounded-2xl lg:text-lg text-sm`} onClick={()=>{return filter?useCart(removeCart(product._id)):useCart(addCart(product))}}>{filter?'Remove Cart':'Add Cart'}</button>
-                                            <button className="lg:py-4 py-2 lg:px-10 px-5 bg-black/50 rounded-2xl lg:text-lg text-sm " onClick={handleDialog}>See more</button>
+                                        <div className="flex gap-5 lg:flex-row flex-col">
+                                            <button className={`lg:py-4 py-2 lg:px-10 px-5 ${filter?'bg-[#752a2a] ':'bg-[#895bd3]'} text-white rounded-full lg:text-lg text-sm`} onClick={()=>{return filter?useCart(removeCart(product._id)):useCart(addCart(product))}}>{filter?'Remove Cart':'Add Cart'}</button>
+                                            <button className="lg:py-4 py-2 lg:px-10 px-5 bg-transparent border-white/50 border-[1px] text-white rounded-full lg:text-lg text-sm " onClick={handleDialog}>See more</button>
                                         </div>
                                     </div>
                                     <img src={`${product.image}`} alt={`${product.description}`} className="lg:absolute -top-20 right-20  static lg:w-2/5 w-4/5 lg:order-2 order-1"/>

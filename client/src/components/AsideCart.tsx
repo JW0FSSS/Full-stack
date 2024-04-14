@@ -19,7 +19,7 @@ export function AsideCart({open}:{open:boolean}) {
                                 <div className="mb-5 flex flex-col items-center gap-4">
                                     <h1 className="text-white">{product.name}</h1>
                                     <h2 className="text-center">{product.description}</h2>
-                                    <span className="text-green-700 text-md">Price: {product.price}$</span>
+                                    <span className="text-[#895bd3] text-md">Price: {product.price}$</span>
                                     <div className="flex gap-4">
                                         <span className=" text-md">quantity: {product.quantity}</span>
                                             <button className='rounded-full border' onClick={()=>cartDispatch(addCart(product))}>

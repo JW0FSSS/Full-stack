@@ -73,7 +73,7 @@ export function SideBar() {
         )}
       </button>
       <aside
-        className={`fixed left-0 top-0 bottom-0 md:w-80 w-full bg-black/90 text-white/70 flex flex-col items-start gap-10 py-5 pl-20 overflow-y-scroll transition-all md:translate-x-0 ${
+        className={`fixed left-0 top-0 bottom-0 md:w-80 w-full bg-[#191919] text-white/70 flex flex-col items-start gap-10 py-5 pl-20 overflow-y-scroll transition-all md:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ scrollbarWidth: "none", overflowY: "scroll" }}
@@ -86,13 +86,13 @@ export function SideBar() {
             />
           </Link>
           <div className="flex flex-col text-white font-semibold justify-center items-center">
-            <span className="text-green-700 text-xl">GOOD</span>
+            <span className="text-[#895bd3] text-xl">GOOD</span>
             <p>GAMES</p>
           </div>
         </header>
         <Link
           to="/cart"
-          className="px-8 py-2 rounded-full bg-green-800 text-white/90"
+          className="px-8 py-2 rounded-full bg-[#895bd3] text-white/90"
         >
           Go to Pay
         </Link>
@@ -125,7 +125,7 @@ export function SideBar() {
           </Link>
         </nav>
         <div className="">
-          <h1 className="pb-7">Category</h1>
+          <h1 className="pb-7 text-white font-semibold">Category</h1>
           <div className="flex flex-col gap-4 items-start">
             {loadCategories?<h1 className="text-center text-black"><Spinner/></h1>:categories.map((category) => {
               return (
