@@ -32,7 +32,7 @@ export function Favorite() {
                         {favorite.map(product=>{
                             const filter=cart.some(e=>e._id==product._id)
                             return(
-                                <article key={product._id} className="bg-[#28282a] rounded-md flex flex-col items-center py-3 px-10 gap-4 text-white/80">
+                                <article key={product._id} className="bg-[#28282a] group rounded-md flex flex-col items-center py-3 px-10 gap-4 text-white/80  text-white/80 relative border-[1px] border-transparent z-0  hover:border-white/80 transition-color ease-in-out  shadow-md">
                                     <div className="-mt-10 w-60 h-60 overflow-hidden grid place-content-center">
                                         <img src={`${product.image}`} alt={`${product.description}`}  />
                                     </div>
