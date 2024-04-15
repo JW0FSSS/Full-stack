@@ -7,7 +7,6 @@ import { favorite } from "./routes/favorite";
 import { product } from "./routes/product";
 import { category } from "./routes/category";
 import { payment } from "routes/payment";
-import schedule from "node-schedule"
 import './config/enviroments'
 
 const app=express()
@@ -30,19 +29,6 @@ app.use((err:ErrorHand,req:Request,res:Response,next:NextFunction)=>{
     res.send({err:err.message}).status(err.status || 500)
 })
 
-schedule.scheduleJob('*/6 * * * *', function(){
-    fetch('http://localhost:3000/category',{
-        method:'get',
-        headers:{
-            'Content-type':'application/json'
-        }
-    })
-    .then(data=>data.json())
-    .then(res=>res.length>0?console.log(':)'):console.log(':('))
-    .catch(error => {
-        console.error('Error al realizar la solicitud:', error);
-    });
-  });
 
 
 ConnectDB()

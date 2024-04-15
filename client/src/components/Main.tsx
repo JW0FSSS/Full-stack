@@ -12,7 +12,6 @@ import { GetProducts } from "../services/products";
 
 export function Main() {
   const [open, setOpen] = useState(false);
-  const [time, setTime] = useState(53);
   const cart = useSelector((state: IStore) => state.cart);
   const product = useSelector((state: IStore) => state.products);
   const [loading, setLoading] = useState(true);
@@ -23,20 +22,10 @@ export function Main() {
       setLoading(false)
         productDispatch(setProducts(products))        
       })    
-      let int
-      if (loading) { 
-        int= setInterval(()=>{
-          setTime(time=>(time-1))
-        },1000)
-      }
+    },[])
 
-        return ()=>clearInterval(int)
-    },[time])
+if (loading) return <h1 className="text-center text-black text-2xl"><Spinner/></h1>
 
-if (loading) {
-  
-  return <h1 className="text-center text-black text-2xl">wait {time} seconds....</h1>
-}
   return (
     <section className="md:ml-80 pl-10 pr-14 pt-7 pb-10 bg-[#212123] min-h-screen z-10">
       <ButtonCart open={open} setOpen={setOpen} />
