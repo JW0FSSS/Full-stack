@@ -6,7 +6,6 @@ import { IStore } from "../store/ConfigureStore";
 import { setCategory } from "../store/categoryReducer";
 import { User } from "../icons/profile";
 import { Heart } from "../icons/heart";
-import { Game } from "../icons/game";
 import { Help } from "../icons/help";
 import { Conditions } from "../icons/conditons";
 import { Confidelity } from "../icons/confidelity";
@@ -15,6 +14,7 @@ import { Instagram } from "../icons/instagram";
 import { Cart } from "../icons/cart";
 import { Store } from "../icons/store";
 import { Spinner } from "./spinner/spiner";
+import { CategorieS } from "./Categories";
 
 export function SideBar() {
   const [open, setOpen] = useState(false);
@@ -127,13 +127,9 @@ export function SideBar() {
         <div className="">
           <h1 className="pb-7 text-white font-semibold">Category</h1>
           <div className="flex flex-col gap-4 items-start">
-            {loadCategories?<h1 className="text-center text-black"><Spinner/></h1>:categories.map((category) => {
-              return (
-                <button key={category._id} className="flex gap-5">
-                  <Game /> <p>{category.name}</p>
-                </button>
-              );
-            })}
+            {loadCategories
+            ?<h1 className="text-center text-black"><Spinner/></h1>
+            :<CategorieS categories={categories}/>}
           </div>
         </div>
         <div className="flex gap-5">

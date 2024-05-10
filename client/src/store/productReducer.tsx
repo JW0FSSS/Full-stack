@@ -9,14 +9,19 @@ export const product=createSlice({
             return state
         },
         setProducts:(_,action:{ payload: IProduct[];type: string;})=>{
-            
+            localStorage.setItem("_products_",JSON.stringify(action.payload))
             const products=action.payload 
 
             return products
-        }
+        },
+        setProductsFilter:(_,action:{ payload: IProduct[];type: string;})=>{
+            const products=action.payload 
+
+            return products
+        },
     }
 })
 
-export const {setProducts} = product.actions
+export const {setProducts,setProductsFilter} = product.actions
 
 export default product.reducer
