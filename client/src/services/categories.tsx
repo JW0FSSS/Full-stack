@@ -1,5 +1,5 @@
 export async function GetCategories() {
-    const res=await fetch('https://vps-4032930-x.dattaweb.com/app2/category',{
+    const res=await fetch('https://vps-5068859-x.dattaweb.com/games/category',{
         method:'get',
         headers:{
             'Content-type':'application/json'
