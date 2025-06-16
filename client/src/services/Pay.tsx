@@ -2,7 +2,7 @@ import { IProduct } from "../types/product.d";
 
 export async function FetchPay({cart}:{cart:IProduct[]}){
 
-    const res= await fetch('https://vps-4032930-x.dattaweb.com/app2/payment',{
+    const res= await fetch('https://vps-5068859-x.dattaweb.com/games/payment',{
         method:'post',
         headers:{
             'Content-type':'application/json'
