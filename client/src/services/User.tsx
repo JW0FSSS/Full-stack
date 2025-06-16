@@ -1,7 +1,7 @@
 import { UserLogin, User } from "../types/User.d"
 
 export async function UserFetchRegister({username,email,password,address,image,phoneNumber}:User) {
-    const res=await fetch('https://vps-4032930-x.dattaweb.com/app2/register',{
+    const res=await fetch('https://vps-5068859-x.dattaweb.com/games/register',{
         method:'post',
         headers:{
             'Content-type':'application/json'
@@ -14,7 +14,7 @@ export async function UserFetchRegister({username,email,password,address,image,p
 
 export async function UserFetchLogin({email,password}:UserLogin) {
         
-        const res=await fetch('https://vps-4032930-x.dattaweb.com/app2/login',{
+        const res=await fetch('https://vps-5068859-x.dattaweb.com/games/login',{
             method:'post',
             headers:{
                 'Content-type':'application/json'
@@ -28,7 +28,7 @@ export async function UserFetchLogin({email,password}:UserLogin) {
 
 export async function UserFetchProfile({token}:{token:string}) {
         
-        const res=await fetch('https://vps-4032930-x.dattaweb.com/app2/profile',{
+        const res=await fetch('https://vps-5068859-x.dattaweb.com/games/profile',{
             headers:{
                 'Content-type':'application/json',
                 'Authorization':`bearer ${token}` 
@@ -41,7 +41,7 @@ export async function UserFetchProfile({token}:{token:string}) {
 
 export async function UserFetchProfileOk({token}:{token:string}) {
         
-        const res=await fetch('https://vps-4032930-x.dattaweb.com/app2/profile',{
+        const res=await fetch('https://vps-5068859-x.dattaweb.com/games/profile',{
             headers:{
                 'Content-type':'application/json',
                 'Authorization':`bearer ${token}` 
