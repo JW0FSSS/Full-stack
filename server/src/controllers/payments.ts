@@ -30,3 +30,31 @@ export async function PaymentController(req:Request,res:Response) {
 
     res.json(session.url)
 }
+
+export async function webhook(req:Request,res:Response) {
+
+    const sig = req.headers['stripe-signature'] as string;
+  const endpointSecret = process.env.STRIPE_KEY_WEBHOOK as string; 
+ const stripe=new Stripe(process.env.STRIPE_KEY||'')
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err) {
+    console.log(`⚠️  Webhook signature verification failed: ${err}`);
+    return res.sendStatus(400);
+  }
+
+  // Procesa el evento
+  if (event.type === 'payment_intent.succeeded') {
+    const paymentIntent = event.data.object;
+    console.log(`💰 PaymentIntent for ${paymentIntent.amount} was successful!`);
+  }
+
+  if (event.type === 'payment_intent.payment_failed') {
+    const paymentIntent = event.data.object;
+    console.log(`💰 PaymentIntent for ${paymentIntent.amount} was failed!`);
+  }
+
+  res.json({ received: true });
+}

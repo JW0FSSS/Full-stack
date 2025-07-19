@@ -8,6 +8,7 @@ import { product } from "./routes/product";
 import { category } from "./routes/category";
 import { payment } from "routes/payment";
 import './config/enviroments'
+import { webhook } from "controllers/payments";
 
 const app=express()
 
@@ -19,6 +20,12 @@ app.use('/payment',payment)
 app.use('/favorite',favorite)
 app.use('/product',product)
 app.use('/category',category)
+
+app.post('/webhook',
+  express.raw({ type: 'application/json' }),
+  webhook
+);
+
 
 app.use((req:Request,res:Response,next:NextFunction)=>{
     const error:ErrorHand=new Error('Not Found')
