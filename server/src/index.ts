@@ -13,6 +13,10 @@ import { webhook } from "controllers/payments";
 const app=express()
 
 app.use(cors({origin:process.env.ORIGIN}))
+app.post('/webhook',
+  express.raw({ type: 'application/json' }),
+  webhook
+);
 app.use(express.json())
 
 app.use(user)
@@ -21,10 +25,6 @@ app.use('/favorite',favorite)
 app.use('/product',product)
 app.use('/category',category)
 
-app.post('/webhook',
-  express.raw({ type: 'application/json' }),
-  webhook
-);
 
 
 app.use((req:Request,res:Response,next:NextFunction)=>{
